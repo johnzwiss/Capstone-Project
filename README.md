@@ -11,9 +11,9 @@ Flashcard game for students times tables 1-12 <br />
 Flippable flashcards <br />
 Timed game/ graded game<br />
 Display student progress in classroom <br />
+Multiple classrooms for teachers<br /> 
 
 # Stretch 
-Multiple classrooms for teachers<br /> 
 Addition, subtraction, and division games<br /> 
 Sound effects<br /> 
 Parent profiles<br /> 
@@ -27,12 +27,17 @@ Materialize<br />
 
 # Wireframes
 
+
 ![Sign up](https://i.imgur.com/YkJ9jJ0.png)
 ![Teacher Login](https://i.imgur.com/dPsaRLQ.png)
 ![Student login](https://i.imgur.com/9Zo5YG0.png)
+Student Welcome Page
 ![Student Welcome Page](https://i.imgur.com/XW0129v.png)
+Flash Card Page
 ![Flash Card Page](https://i.imgur.com/vCq4q6T.png)
+Classroom View
 ![Classroom View](https://i.imgur.com/GR6xUfZ.png)
+Student Detail Page
 ![Student View](https://i.imgur.com/4CGdaSD.png)
 
 # ERD
