@@ -17,6 +17,7 @@ Multiple classrooms for teachers
 Addition, subtraction, and division games 
 Sound effects 
 Parent profiles 
+Review lessons 
 
 # Tech Stack 
 Django
