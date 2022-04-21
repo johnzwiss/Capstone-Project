@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -55,6 +55,10 @@ def signup_view(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            g = Group.objects.get(name='teacher')
+            g.user_set.add(user)
+            user.is_staff= True
+            user.save()
             login(request, user)
             return HttpResponseRedirect('/user/' + str(user.username))
     # if the req is a get, then show the form
