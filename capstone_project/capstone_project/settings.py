@@ -78,6 +78,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'capstone',
+        'USER': 'postgres',
+        'PASSWORD': 'edward42',
+        'HOST': 'localhost'
     }
 }
 
