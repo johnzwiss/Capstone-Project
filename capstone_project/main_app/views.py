@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils.decorators import method_decorator
 from .forms import LoginForm
 from .models import Student, Classroom
@@ -68,10 +68,12 @@ def signup_view(request):
         form = UserCreationForm()
         return render(request, 'signup.html', {'form': form})
 
+
 # game view 
 
 def game(request):
-    answer = 0
+
+       answer = 0
     if request.method == 'POST':
         answer = request.POST['answer']
         print("THIS IS THE REQUEST #############")
@@ -83,3 +85,21 @@ def game(request):
    ## print(lesson)
     print(request)
     return render (request, 'student/game.html', {'lesson' : lesson, 'n': n, 'answer' : answer})
+
+
+
+
+
+
+
+
+
+
+
+# Teacher View
+@user_passes_test(lambda user: user.is_staff)
+def teacher_view(request): 
+    classrooms = Classroom.objects.all()
+    students = Student
+    return render (request, 'teacher/classroom.html', {'classrooms': classrooms})
+
