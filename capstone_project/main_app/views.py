@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils.decorators import method_decorator
 from .forms import LoginForm
 from .models import Student, Classroom
+from .lessons import a,b,c,d,e,f,g,h,i
 
 # Create your views here.
 
@@ -71,19 +72,18 @@ def signup_view(request):
 # game view 
 
 def game(request):
-    return render (request, 'student/game.html')
-
-
-
-
-
-
-
-
-
-
-
-
+    answer = 0
+    if request.method == 'POST':
+        answer = request.POST['answer']
+        print("THIS IS THE REQUEST #############")
+        print(request.POST['answer'])
+        
+    lesson = a 
+    n = 0
+    
+   ## print(lesson)
+    print(request)
+    return render (request, 'student/game.html', {'lesson' : lesson, 'n': n, 'answer' : answer})
 
 
 
@@ -98,3 +98,12 @@ def teacher_view(request):
     classrooms = Classroom.objects.all()
     students = Student
     return render (request, 'teacher/classroom.html', {'classrooms': classrooms})
+
+# SELECT * FROM main_app_classroom JOIN main_app_student ON main_app_classroom.id = main_app_student.classroom_id;
+
+# Teacher View classroom
+@user_passes_test(lambda user: user.is_staff)
+def classroom_show(request, classroom_id):
+    classroom = Classroom.objects.get(id=classroom_id)
+
+    return render (request, 'teacher/classroom_show.html', {'classroom': classroom})
