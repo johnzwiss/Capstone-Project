@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .forms import LoginForm
+from .models import Student, Classroom
 
 # Create your views here.
 
@@ -65,3 +66,8 @@ def signup_view(request):
     else:
         form = UserCreationForm()
         return render(request, 'signup.html', {'form': form})
+
+# game view 
+
+def game(request):
+    return render (request, 'student/game.html')
