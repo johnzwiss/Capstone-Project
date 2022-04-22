@@ -1,5 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
     Welcome Student!
-
+    <div class="container row center-align">
+          <div class="card teal lighten-2 col s6">
+              <h3> {{lesson.0.num1}} </h3>
+              <h3>X</h3>
+              <h3>{{lesson.0.num2}}</h3>
+              <form type="submit" action="" method = "POST" > 
+                {% csrf_token %}
+                <input  id="answer" type="text" name="answer"  placeholder="" > 
+                <button id="submit" type="submit" >Answer</button> 
+            </form> 
+            {{answer}}
+            {% if answer == '1'%}
+                <p>Correct!</p>
+            {% else %}
+                <p>BOO</p>
+            {%endif%}
+          </div>
+      </div>
 {% endblock %}
