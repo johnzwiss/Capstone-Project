@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .forms import LoginForm
 from .models import Student, Classroom
+from .lessons import a,b,c,d,e,f,g,h,i
 
 # Create your views here.
 
@@ -70,4 +71,15 @@ def signup_view(request):
 # game view 
 
 def game(request):
-    return render (request, 'student/game.html')
+    answer = 0
+    if request.method == 'POST':
+        answer = request.POST['answer']
+        print("THIS IS THE REQUEST #############")
+        print(request.POST['answer'])
+        
+    lesson = a 
+    n = 0
+    
+   ## print(lesson)
+    print(request)
+    return render (request, 'student/game.html', {'lesson' : lesson, 'n': n, 'answer' : answer})
