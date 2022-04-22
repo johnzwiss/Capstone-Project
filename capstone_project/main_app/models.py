@@ -4,15 +4,17 @@ from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
 
-class Student(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    lessons_completed = ArrayField(base_field=models.CharField(max_length=200, null=True), default=list, blank=True)
 
 
 class Classroom(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    students = models.ForeignKey(Student, on_delete=models.CASCADE)
+    
 
     def __str__(self):
         return self.name
+
+class Student(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
+    lessons_completed = ArrayField(base_field=models.CharField(max_length=200, null=True), default=list, blank=True)
