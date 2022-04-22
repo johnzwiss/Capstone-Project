@@ -12,6 +12,10 @@ from .lessons import a,b,c,d,e,f,g,h,i
 
 # Create your views here.
 
+# index view
+def index(request):
+    return render(request, 'index.html')
+
 # login view
 def login_view(request):
     # we can use the same view for multiple HTTP requests
@@ -33,7 +37,7 @@ def login_view(request):
                 if user.is_active:
                     # use django's built in login function
                     login(request, user)
-                    return HttpResponseRedirect('/user/' + str(user.username))
+                    return HttpResponseRedirect('/teacher/classroom')
                 else:
                     print('the account has been disabled')
             else:
