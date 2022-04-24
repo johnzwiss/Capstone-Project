@@ -76,7 +76,10 @@ def signup_view(request):
 # game view 
 
 def game(request):
+
+
     answer = 0
+
     if request.method == 'POST':
         answer = request.POST['answer']
         print("THIS IS THE REQUEST #############")
@@ -94,14 +97,13 @@ def game(request):
 
 
 
-
-
 # Teacher View
 @user_passes_test(lambda user: user.is_staff)
 def teacher_view(request): 
     classrooms = Classroom.objects.all()
     students = Student
     return render (request, 'teacher/classroom.html', {'classrooms': classrooms})
+
 
 # SELECT * FROM main_app_classroom JOIN main_app_student ON main_app_classroom.id = main_app_student.classroom_id;
 
