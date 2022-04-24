@@ -109,5 +109,8 @@ def teacher_view(request):
 @user_passes_test(lambda user: user.is_staff)
 def classroom_show(request, classroom_id):
     classroom = Classroom.objects.get(id=classroom_id)
+    # students = Student.objects.all().select_related(classroom_id)
+    students = Student.objects.all(classroom=classroom_id) # objects.get fails because it returns more than 1
+    print('what is students', students)
 
-    return render (request, 'teacher/classroom_show.html', {'classroom': classroom})
+    return render (request, 'teacher/classroom_show.html', { 'classroom': classroom})
