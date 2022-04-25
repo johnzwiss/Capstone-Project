@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils.decorators import method_decorator
 from .forms import LoginForm
 from .models import Student, Classroom
-from .lessons import a,b,c,d,e,f,g,h,i
+from .lessons import multiplication_lesson
 import time
 
 # Create your views here.
@@ -35,10 +35,13 @@ def login_view(request):
             # if you found a user with matching credentials
             if user is not None:
                 # if that user has not been disabled by admin
-                if user.is_active:
+                if user.is_active and user.is_staff:
                     # use django's built in login function
                     login(request, user)
                     return HttpResponseRedirect('/teacher/classroom')
+                elif user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect('/student/welcome/' + str(user.id))
                 else:
                     print('the account has been disabled')
             else:
@@ -80,18 +83,24 @@ n = 1
 correct = 0
 game_complete = False
 counter = None
+
+def lesson_check(request):
+    current_user = request.user
+    student = Student.objects.get(user_id = current_user.id)
+    # for lessons in student.lessons_completed:
+    #     if lessons == 'a':
+    #         lesson = b 
 def game(request):
+    current_user = request.user
     if request.method == 'POST':
         global n
         global correct
         global game_complete
         global tic
         global counter
-        # answer1 = 0
-        lesson = a
-        num1 = lesson[n]['num1']
-        num2 = lesson[n]['num2']
-        num3 = lesson[n - 1]['num2']
+        num1 = multiplication_lesson[0][n]['num1']
+        num2 = multiplication_lesson[0][n]['num2']
+        num3 = multiplication_lesson[0][n - 1]['num2']
         problem_answer = str((num1 * num3))
         try:
             answer1 = (request.POST["answer"])
@@ -108,23 +117,30 @@ def game(request):
             print(game_complete, toc)
             
     else:
+        current_user = request.user
+        student = Student.objects.get(user_id = current_user.id)
+        # for lessons in student.lessons_completed:
+        #     if lessons == 'a':
+        #         lesson = b
         game_complete = False
         n = 1
         answer1 = 0
-        lesson = a
         correct = 0
-        num1 = lesson[0]['num1']
-        num2 = lesson[0]['num2']
-        num3 = lesson[0-1]['num2']
+        num1 = multiplication_lesson[0][n]['num1']
+        num2 = multiplication_lesson[0][n]['num2']
+        num3 = multiplication_lesson[0][n - 1]['num2']
         problem_answer = str((num1 * num3))
         tic = time.perf_counter()
         print("THIS IS ON LOAD", num1, num2, tic)
-    return render (request, 'student/game.html', {'lesson' : lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter})
+    return render (request, 'student/game.html', {'multiplication_lesson' : multiplication_lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter})
 
 
 
-def student_welcome(request):
-    return render(request, 'student/welcome.html')
+def student_welcome(request, student_id):
+    current_user = request.user
+    student = Student.objects.get(user_id = current_user.id)
+    print(student.lessons_completed)
+    return render(request, 'student/welcome.html', {'student': student})
 
 
 # Teacher View

@@ -2,8 +2,13 @@
 {% block content %}
     <div class="container row center-align">
           <div class="card teal lighten-2 col s6">
-              <h3>Welcome Student!</h3>
-              <a href="../game">Start Lesson</a>
+              <h3>Welcome {{student.0.user}}!</h3>
+              <h3>You have completed lessons: </h3>
+              {% for lesson in student.0.lessons_completed %}
+                    <li>{{lesson}}</li>
+                    {% endfor %}
+              <a href="../game">Start Lesson {{next_lesson}}</a>
+              
           </div>
       </div>
 {% endblock %}
