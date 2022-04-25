@@ -74,27 +74,25 @@ def signup_view(request):
 
 
 # game view 
+n = 0
+
 
 def game(request):
-
-    n = 0
+    global n
     answer = 0
-    lesson = a 
-    if request.method == 'POST':
-        answer = request.POST['answer']
-        print("THIS IS THE REQUEST #############")
-        print(request.POST['answer'])
-        n =+ 1
-        print(n)
-    
-    
+    lesson = a
+
+    # if request.method == 'POST':
     num1 = lesson[n]['num1']
     num2 = lesson[n]['num2']
-    print(num1, num2)
+    num3 = lesson[n - 1]['num2']
+    answer = int(request.POST['answer'])
+    problem_answer = (num1 * num3)
+    print("This is the correct answer", type(problem_answer))
+    print(type(answer))
+    n += 1
     
-   ## print(lesson)
-    print(request)
-    return render (request, 'student/game.html', {'lesson' : lesson, 'n': n, 'answer' : answer})
+    return render (request, 'student/game.html', {'lesson' : lesson, 'n': n, 'answer' : answer, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer})
 
 
 
