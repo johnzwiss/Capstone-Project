@@ -72,15 +72,20 @@ def signup_view(request):
 # game view 
 
 def game(request):
-
-       answer = 0
+    n = 0
+    answer = 0
+    lesson = a 
     if request.method == 'POST':
         answer = request.POST['answer']
         print("THIS IS THE REQUEST #############")
         print(request.POST['answer'])
-        
-    lesson = a 
-    n = 0
+        n =+ 1
+        print(n)
+    
+    
+    num1 = lesson[n]['num1']
+    num2 = lesson[n]['num2']
+    print(num1, num2)
     
    ## print(lesson)
     print(request)
