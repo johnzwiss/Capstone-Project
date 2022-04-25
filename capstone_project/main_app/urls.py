@@ -10,6 +10,7 @@ urlpatterns = [
     path('student/welcome/', views.student_welcome, name="welcome"),
     path('teacher/classroom/', views.teacher_view, name='teacher_view'),
     path('teacher/classroom/<int:classroom_id>/' , views.classroom_show, name='classroom_show'),
-    path('teacher/classroom/<int:classroom_id>/<int:student_id>/' , views.student_show , name='student_show')
+    path('teacher/classroom/<int:classroom_id>/<int:student_id>/' , views.student_show , name='student_show'),
+    path('teacher/classroom/<int:classroom_id>/<int:pk>/update' , views.StudentUpdate.as_view(), name='student_update'),
     
 ]
