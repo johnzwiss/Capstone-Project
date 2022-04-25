@@ -160,6 +160,8 @@ def student_show(request, classroom_id, student_id):
     # get the students data based off of student id
     student = Student.objects.get(id=student_id)
 
+    print('what is classroom_id from student', student.lessons_completed)
+
     # render the student show view
     return render (request, 'teacher/student_show.html', {'student': student})
 

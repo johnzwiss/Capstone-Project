@@ -3,8 +3,8 @@
 {% block content %}
     <form action="" method="post">
         {% csrf_token %}
+        <h4>Editing {{student.user}}</h4>
         <table>
-            Editing {{student.user}}
             {{ form.as_table }}
         </table>
         <input type="submit" value="Submit!">
