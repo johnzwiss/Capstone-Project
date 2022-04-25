@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div>
+    Name: {{student.user}}
+  
+
+    <div class="results">
+        <div >
+            {% for lesson in student.lessons_completed %}
+                Lesson: {{lesson}} <br/>
+            {% endfor %}
+        </div>
+        <div>
+            {% for results in student.results%}
+                {{results}} <br/>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock%}

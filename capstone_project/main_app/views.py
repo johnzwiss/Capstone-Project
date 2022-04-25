@@ -152,3 +152,13 @@ def classroom_show(request, classroom_id):
     
     # render the classroom show view with the queried information
     return render (request, 'teacher/classroom_show.html', { 'classroom': classroom , 'students': students})
+
+
+# Teacher View Student
+@user_passes_test(lambda user: user.is_staff)
+def student_show(request, classroom_id, student_id):
+    # get the students data based off of student id
+    student = Student.objects.get(id=student_id)
+
+    # render the student show view
+    return render (request, 'teacher/student_show.html', {'student': student})
