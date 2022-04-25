@@ -82,14 +82,21 @@ def game(request):
     answer = 0
     lesson = a
 
-    # if request.method == 'POST':
     num1 = lesson[n]['num1']
     num2 = lesson[n]['num2']
     num3 = lesson[n - 1]['num2']
-    answer1 = int(request.POST['answer'])
+    print("THIS IS N", n)
     problem_answer = (num1 * num3)
-    print("This is the correct answer", type(problem_answer))
-    print(type(answer))
+    try:
+        answer1 = int(request.POST["answer"])
+    except KeyError:
+        answer1 = "0"
+    
+    print("This is the correct answer", (problem_answer))
+    
+    
+    
+    print((answer1))
     n += 1
     
     return render (request, 'student/game.html', {'lesson' : lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer})
