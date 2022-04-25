@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
     Welcome Student!
+    {% if game_complete %}
+    <h1> Game Complete </h1>
+    <h3> You got {{correct}} correct in {{counter}} seconds!</h3>
+    {%else%}
     <div class="container row center-align">
           <div class="card teal lighten-2 col s6">
               <h3> {{num1}} </h3>
@@ -11,12 +15,13 @@
                 <input  id="answer" type="text" name="answer"  placeholder="" > 
                 <button id="submit" type="submit" >Answer</button> 
             </form> 
-            {{answer1}}
             {% if answer1 == problem_answer %}
                 <p>Correct!</p>
-            {% else %}
-                <p>BOO</p>
+            
+                
             {%endif%}
+            <p>Amount correct: {{correct}}</p>
           </div>
       </div>
+      {%endif%}
 {% endblock %}

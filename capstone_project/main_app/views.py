@@ -9,6 +9,7 @@ from django.utils.decorators import method_decorator
 from .forms import LoginForm
 from .models import Student, Classroom
 from .lessons import a,b,c,d,e,f,g,h,i
+import time
 
 # Create your views here.
 
@@ -74,36 +75,56 @@ def signup_view(request):
 
 
 # game view 
-n = 0
-
-
+tic = None
+n = 1
+correct = 0
+game_complete = False
+counter = None
 def game(request):
-    global n
-    answer = 0
-    lesson = a
+    if request.method == 'POST':
+        global n
+        global correct
+        global game_complete
+        global tic
+        global counter
+        # answer1 = 0
+        lesson = a
+        num1 = lesson[n]['num1']
+        num2 = lesson[n]['num2']
+        num3 = lesson[n - 1]['num2']
+        problem_answer = str((num1 * num3))
+        try:
+            answer1 = (request.POST["answer"])
+        except KeyError:
+            answer1 = 0
+        if answer1 == problem_answer:
+            correct +=1
+        n += 1
+        print(n)
+        if n > 12:
+            game_complete = True
+            toc = time.perf_counter()
+            counter = round((toc - tic), 2)
+            print(game_complete, toc)
+            
+    else:
+        game_complete = False
+        n = 1
+        answer1 = 0
+        lesson = a
+        correct = 0
+        num1 = lesson[0]['num1']
+        num2 = lesson[0]['num2']
+        num3 = lesson[0-1]['num2']
+        problem_answer = str((num1 * num3))
+        tic = time.perf_counter()
+        print("THIS IS ON LOAD", num1, num2, tic)
+    return render (request, 'student/game.html', {'lesson' : lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter})
 
-    num1 = lesson[n]['num1']
-    num2 = lesson[n]['num2']
-    num3 = lesson[n - 1]['num2']
-    print("THIS IS N", n)
-    problem_answer = (num1 * num3)
-    try:
-        answer1 = int(request.POST["answer"])
-    except KeyError:
-        answer1 = "0"
-    
-    print("This is the correct answer", (problem_answer))
-    
-    
-    
-    print((answer1))
-    n += 1
-    
-    return render (request, 'student/game.html', {'lesson' : lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer})
 
 
-
-
+def student_welcome(request):
+    return render(request, 'student/welcome.html')
 
 
 # Teacher View
