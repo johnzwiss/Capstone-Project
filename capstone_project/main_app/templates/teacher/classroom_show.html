@@ -8,12 +8,13 @@
         <table>
             <tr>
                 <th>Student Name</th>
-                <th>Lessons Completed</th>
+                <th>Last Lesson Completed</th>
+                <th>Most Recent Score</th>
             </tr>
             {% for student in students%}
                 <tr>
                     <td>{{student.user}}</td>
-                    <td>{{student.lessons_completed}}</td>
+                    <td>{{student.lessons_completed | last}}</td>
                 </tr>
             {% endfor %}
         </table>
