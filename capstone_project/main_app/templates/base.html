@@ -9,12 +9,9 @@
 	<body>
 		<nav>
 			<div class="nav-wrapper teal lighten-2">
-				<a href="/cats/" class="brand-logo right">cat collector</a>
+				<a href="/cats/" class="brand-logo right">TEMPO MATH</a>
 				<ul id="nav-mobile" class="left hide-on-med-and-down">
 					{% if user.is_authenticated %}
-						<li><a href="/cats/create">Add a Cat!</a></li>
-						<li><a href="/cattoys/create">Add a Cat Toy!</a></li>
-						<li><a href="/cattoys">View All Cat Toys!</a></li>
 						<li><a href="/user/{{user.username}}">Profile</a></li>
 						<li><a href="/logout">Log out</a></li>
 					{% else %}
@@ -31,7 +28,7 @@
 
 		<footer class="page-footer">
 			<div class="container col s6 right-align">
-				All Rights Reserved, catcollector 2022
+				All Rights Reserved, Tempo Math 2022
 			</div>
 		</footer>
 	</body>

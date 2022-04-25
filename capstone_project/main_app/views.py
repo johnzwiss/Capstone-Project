@@ -12,6 +12,10 @@ from .lessons import a,b,c,d,e,f,g,h,i
 
 # Create your views here.
 
+# index view
+def index(request):
+    return render(request, 'index.html')
+
 # login view
 def login_view(request):
     # we can use the same view for multiple HTTP requests
@@ -33,7 +37,7 @@ def login_view(request):
                 if user.is_active:
                     # use django's built in login function
                     login(request, user)
-                    return HttpResponseRedirect('/user/' + str(user.username))
+                    return HttpResponseRedirect('/teacher/classroom')
                 else:
                     print('the account has been disabled')
             else:
@@ -73,7 +77,9 @@ def signup_view(request):
 
 def game(request):
 
-       answer = 0
+
+    answer = 0
+
     if request.method == 'POST':
         answer = request.POST['answer']
         print("THIS IS THE REQUEST #############")
@@ -91,11 +97,6 @@ def game(request):
 
 
 
-
-
-
-
-
 # Teacher View
 @user_passes_test(lambda user: user.is_staff)
 def teacher_view(request): 
@@ -103,3 +104,15 @@ def teacher_view(request):
     students = Student
     return render (request, 'teacher/classroom.html', {'classrooms': classrooms})
 
+
+# SELECT * FROM main_app_classroom JOIN main_app_student ON main_app_classroom.id = main_app_student.classroom_id;
+
+# Teacher View classroom
+@user_passes_test(lambda user: user.is_staff)
+def classroom_show(request, classroom_id):
+    classroom = Classroom.objects.get(id=classroom_id)
+    # students = Student.objects.all().select_related(classroom_id)
+    students = Student.objects.all(classroom=classroom_id) # objects.get fails because it returns more than 1
+    print('what is students', students)
+
+    return render (request, 'teacher/classroom_show.html', { 'classroom': classroom})

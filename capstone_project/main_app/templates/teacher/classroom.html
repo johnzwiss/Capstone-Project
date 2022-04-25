@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2>Hello {{user.username}}!</h2> 
-    <h3> {{classrooms}} </h3>
+    
 
     <div class="container row center-align">
         {% for classrooms in classrooms %}
-            <a href="teacher/classroom/{{classrooms.id}}">{{classrooms.name}}</a> <br/>
+           <h7> Class Name:  <a href="{{classrooms.id}}">{{classrooms.name}}</a> </h7> <br/>
             <p>{{classrooms.students}}</p>
         {% endfor %}
     </div>
