@@ -3,3 +3,4 @@ from .models import Student, Classroom
 # Register your models here.
 admin.site.register(Student)
 admin.site.register(Classroom)
+# admin.site.register(Teacher)

@@ -108,10 +108,12 @@ def game(request):
 
 # Teacher View
 @user_passes_test(lambda user: user.is_staff)
-def teacher_view(request): 
+def teacher_view(request):
+    # get the current user 
+    current_user = request.user
     
-    # list all the classrooms
-    classrooms = Classroom.objects.all()
+    # list all the classrooms that belong to current teacher
+    classrooms = Classroom.objects.all().filter(user_id=current_user.id)
     return render (request, 'teacher/classroom.html', {'classrooms': classrooms})
 
 
