@@ -86,13 +86,13 @@ def game(request):
     num1 = lesson[n]['num1']
     num2 = lesson[n]['num2']
     num3 = lesson[n - 1]['num2']
-    answer = int(request.POST['answer'])
+    answer1 = int(request.POST['answer'])
     problem_answer = (num1 * num3)
     print("This is the correct answer", type(problem_answer))
     print(type(answer))
     n += 1
     
-    return render (request, 'student/game.html', {'lesson' : lesson, 'n': n, 'answer' : answer, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer})
+    return render (request, 'student/game.html', {'lesson' : lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer})
 
 
 
@@ -102,8 +102,9 @@ def game(request):
 # Teacher View
 @user_passes_test(lambda user: user.is_staff)
 def teacher_view(request): 
+    
+    # list all the classrooms
     classrooms = Classroom.objects.all()
-    students = Student
     return render (request, 'teacher/classroom.html', {'classrooms': classrooms})
 
 
@@ -112,11 +113,12 @@ def teacher_view(request):
 # Teacher View classroom
 @user_passes_test(lambda user: user.is_staff)
 def classroom_show(request, classroom_id):
+
+    # query to get the classroom based off url id
     classroom = Classroom.objects.get(id=classroom_id)
-    # students = Student.objects.all().select_related(classroom_id)
-    # students = Student.objects.all(classroom=classroom_id) # objects.get fails because it returns more than 1
+    # query to get the students from that classroom 
     students = Student.objects.filter(classroom_id = classroom_id)
 
-    print('what is students', students[0].user)
-
+    
+    # render the classroom show view with the queried information
     return render (request, 'teacher/classroom_show.html', { 'classroom': classroom , 'students': students})
