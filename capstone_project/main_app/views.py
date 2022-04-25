@@ -116,7 +116,9 @@ def teacher_view(request):
 def classroom_show(request, classroom_id):
     classroom = Classroom.objects.get(id=classroom_id)
     # students = Student.objects.all().select_related(classroom_id)
-    students = Student.objects.all(classroom=classroom_id) # objects.get fails because it returns more than 1
-    print('what is students', students)
+    # students = Student.objects.all(classroom=classroom_id) # objects.get fails because it returns more than 1
+    students = Student.objects.filter(classroom_id = classroom_id)
 
-    return render (request, 'teacher/classroom_show.html', { 'classroom': classroom})
+    print('what is students', students[0].user)
+
+    return render (request, 'teacher/classroom_show.html', { 'classroom': classroom , 'students': students})
