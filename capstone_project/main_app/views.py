@@ -84,23 +84,20 @@ correct = 0
 game_complete = False
 counter = None
 
-def lesson_check(request):
-    current_user = request.user
-    student = Student.objects.get(user_id = current_user.id)
-    # for lessons in student.lessons_completed:
-    #     if lessons == 'a':
-    #         lesson = b 
+
 def game(request):
     current_user = request.user
+    student = Student.objects.get(user_id = current_user.id)
+    j = len(student.lessons_completed)
     if request.method == 'POST':
         global n
         global correct
         global game_complete
         global tic
         global counter
-        num1 = multiplication_lesson[0][n]['num1']
-        num2 = multiplication_lesson[0][n]['num2']
-        num3 = multiplication_lesson[0][n - 1]['num2']
+        num1 = multiplication_lesson[j][n]['num1']
+        num2 = multiplication_lesson[j][n]['num2']
+        num3 = multiplication_lesson[j][n - 1]['num2']
         problem_answer = str((num1 * num3))
         try:
             answer1 = (request.POST["answer"])
@@ -119,16 +116,14 @@ def game(request):
     else:
         current_user = request.user
         student = Student.objects.get(user_id = current_user.id)
-        # for lessons in student.lessons_completed:
-        #     if lessons == 'a':
-        #         lesson = b
+        j = len(student.lessons_completed)
         game_complete = False
         n = 1
         answer1 = 0
         correct = 0
-        num1 = multiplication_lesson[0][n]['num1']
-        num2 = multiplication_lesson[0][n]['num2']
-        num3 = multiplication_lesson[0][n - 1]['num2']
+        num1 = multiplication_lesson[j][0]['num1']
+        num2 = multiplication_lesson[j][0]['num2']
+        num3 = multiplication_lesson[j][0 - 1]['num2']
         problem_answer = str((num1 * num3))
         tic = time.perf_counter()
         print("THIS IS ON LOAD", num1, num2, tic)
