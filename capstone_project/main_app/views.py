@@ -144,6 +144,17 @@ def student_welcome(request, student_id):
     print(student.lessons_completed)
     return render(request, 'student/welcome.html', {'student': student})
 
+# Student Results View
+def student_results(request):
+    # get the students data based off of student id
+    current_user = request.user
+    student = Student.objects.get(user_id = current_user.id)
+
+    print('what is classroom_id from student', student.lessons_completed)
+
+    # render the student show view
+    return render (request, 'student/student_results.html', {'student': student})
+
 
 # Teacher View
 @user_passes_test(lambda user: user.is_staff)
