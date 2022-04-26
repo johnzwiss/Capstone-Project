@@ -10,6 +10,7 @@ from .forms import LoginForm
 from .models import Student, Classroom
 from .lessons import multiplication_lesson
 import time
+import array
 
 # Create your views here.
 
@@ -110,8 +111,12 @@ def game(request):
         if n > 12:
             game_complete = True
             toc = time.perf_counter()
-            counter = round((toc - tic), 2)
-            print(game_complete, toc)
+            counter = str(round((toc - tic), 2))
+            tracker = (len(student.lessons_completed) + 1)
+            score = str(round(correct/12 * 100, 2))
+            student.lessons_completed.append(tracker)
+            student.results.append('Score: ' + score + '%' ' Time: ' + counter)
+            student.save()
             
     else:
         current_user = request.user
