@@ -163,3 +163,33 @@ def classroom_show(request, classroom_id):
     
     # render the classroom show view with the queried information
     return render (request, 'teacher/classroom_show.html', { 'classroom': classroom , 'students': students})
+
+
+# Teacher View Student
+@user_passes_test(lambda user: user.is_staff)
+def student_show(request, classroom_id, student_id):
+    # get the students data based off of student id
+    student = Student.objects.get(id=student_id)
+
+    print('what is classroom_id from student', student.lessons_completed)
+
+    # render the student show view
+    return render (request, 'teacher/student_show.html', {'student': student})
+
+# @user_passes_test(lambda user: user.is_staff)
+class StudentUpdate(UpdateView):
+    model= Student
+    fields = ['lessons_completed', 'results']
+
+    # now we use a function to determine if our form data is valid
+    def form_valid(self, form):
+        # commit=False is useful when we're getting data from a form
+        # but we need to populate with some non-null data
+        # saving with commit=False gets us a model object, then we can add our extra data and save
+        self.object = form.save(commit=False)
+        self.object.save()
+
+        classroom = str(self.object.classroom_id)
+        # print('what is self.object', self.object.classroom_id)
+        # pk is the primary key, aka the id of the object
+        return HttpResponseRedirect('/teacher/classroom/' + classroom + '/'+ str(self.object.pk))
