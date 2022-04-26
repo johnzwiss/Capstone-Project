@@ -5,6 +5,7 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.utils.decorators import method_decorator
 from .forms import LoginForm
 from .models import Student, Classroom
@@ -177,9 +178,13 @@ def student_show(request, classroom_id, student_id):
     return render (request, 'teacher/student_show.html', {'student': student})
 
 # @user_passes_test(lambda user: user.is_staff)
-class StudentUpdate(UpdateView):
+class StudentUpdate(UserPassesTestMixin, UpdateView):
+
     model= Student
     fields = ['lessons_completed', 'results']
+
+    def test_func(self):
+        return self.request.user.is_staff
 
     # now we use a function to determine if our form data is valid
     def form_valid(self, form):
