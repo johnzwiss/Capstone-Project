@@ -193,3 +193,5 @@ class StudentUpdate(UpdateView):
         # print('what is self.object', self.object.classroom_id)
         # pk is the primary key, aka the id of the object
         return HttpResponseRedirect('/teacher/classroom/' + classroom + '/'+ str(self.object.pk))
+
+#commit
