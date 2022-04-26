@@ -5,7 +5,9 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.utils.decorators import method_decorator
+from django.forms import ModelChoiceField
 from .forms import LoginForm
 from .models import Student, Classroom
 from .lessons import multiplication_lesson
@@ -181,10 +183,52 @@ def student_show(request, classroom_id, student_id):
     # render the student show view
     return render (request, 'teacher/student_show.html', {'student': student})
 
+class ClassroomCreate(UserPassesTestMixin, CreateView): 
+    model = Classroom
+    fields = ['name']
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def form_valid(self, form):
+    # creating an object from the form
+        self.object = form.save(commit=False)
+        # adding a user to that object
+        self.object.user = self.request.user
+        # saving the object in the db
+        self.object.save()
+        # redirecting to the main index page
+        return HttpResponseRedirect('/teacher/classroom/')
+
+
+
+class StudentCreate(UserPassesTestMixin, CreateView):
+    model = Student
+    fields = "__all__"
+   
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def form_valid(self, form):
+    # creating an object from the form
+        self.object = form.save(commit=False)
+        # adding a user to that object
+        self.object.user = self.request.user
+        # saving the object in the db
+        self.object.save()
+        # redirecting to the main index page
+        return HttpResponseRedirect('/teacher/classroom/')
+
+
 # @user_passes_test(lambda user: user.is_staff)
-class StudentUpdate(UpdateView):
+class StudentUpdate(UserPassesTestMixin, UpdateView):
+
     model= Student
-    fields = ['lessons_completed', 'results']
+    fields = ['classroom','lessons_completed', 'results' ]
+  
+
+    def test_func(self):
+        return self.request.user.is_staff
 
     # now we use a function to determine if our form data is valid
     def form_valid(self, form):
