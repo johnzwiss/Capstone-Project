@@ -183,6 +183,43 @@ def student_show(request, classroom_id, student_id):
     # render the student show view
     return render (request, 'teacher/student_show.html', {'student': student})
 
+class ClassroomCreate(UserPassesTestMixin, CreateView): 
+    model = Classroom
+    fields = ['name']
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def form_valid(self, form):
+    # creating an object from the form
+        self.object = form.save(commit=False)
+        # adding a user to that object
+        self.object.user = self.request.user
+        # saving the object in the db
+        self.object.save()
+        # redirecting to the main index page
+        return HttpResponseRedirect('/teacher/classroom/')
+
+
+
+class StudentCreate(UserPassesTestMixin, CreateView):
+    model = Student
+    fields = "__all__"
+   
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def form_valid(self, form):
+    # creating an object from the form
+        self.object = form.save(commit=False)
+        # adding a user to that object
+        self.object.user = self.request.user
+        # saving the object in the db
+        self.object.save()
+        # redirecting to the main index page
+        return HttpResponseRedirect('/teacher/classroom/')
+
+
 # @user_passes_test(lambda user: user.is_staff)
 class StudentUpdate(UserPassesTestMixin, UpdateView):
 
