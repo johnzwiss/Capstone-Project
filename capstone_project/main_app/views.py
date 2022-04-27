@@ -128,12 +128,13 @@ def game(request):
             student.save()
         elif n > 12 and correct <= 10:
             game_complete = True
+            lesson_pass = False
             toc = time.perf_counter()
             counter = str(round((toc - tic), 2))
             tracker = (len(student.lessons_completed) + 1)
             score = str(round(correct/12 * 100, 2))
             student.lessons_attempted.append(tracker)
-            student.results.append('Score: ' + score + '%' ' Time: ' + counter)
+            student.attempted_results.append('Score: ' + score + '%' ' Time: ' + counter)
             student.save()
             
     else:

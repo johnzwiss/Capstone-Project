@@ -18,7 +18,7 @@
               <h3>{{num2}}</h3>
               <form type="submit" action="" method = "POST" > 
                 {% csrf_token %}
-                <input  id="answer" type="text" name="answer"  placeholder="" > 
+                <input  id="answer" type="text" name="answer"  placeholder="" autofocus="autofocus" > 
                 <button id="submit" type="submit" >Answer</button> 
             </form> 
             {% if answer1 == problem_answer %}

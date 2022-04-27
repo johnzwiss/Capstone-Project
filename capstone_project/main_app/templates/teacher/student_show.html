@@ -35,6 +35,35 @@
             {% endfor %}
             </table>
         </div>
+        <div class="results">
+            <div >
+               
+                <table>
+                    <th>Lesson</th>
+                
+                {% for lesson in student.lessons_attempted %}
+                    
+                    <tr>
+                        <td>Lesson: {{lesson}}</td>
+                    </tr> 
+                    
+                {% endfor %}
+               
+                </table>
+            </div>
+            <div>
+    
+                <table class="results_table">
+                    <th>Results</th>
+               
+                
+                {% for results in student.attempted_results%}
+                    <tr>
+                    <td>{{results}}</td>
+                    </tr>
+                {% endfor %}
+                </table>
+            </div>
         <a class="waves-effect waves-light btn-small" href="/teacher/classroom/{{student.classroom_id}}">Back</a>
         <a class="waves-effect waves-light btn-small" href="/admin/main_app/student/{{student.id}}/change/">update</a>
     </div>
