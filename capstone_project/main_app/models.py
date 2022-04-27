@@ -17,6 +17,19 @@ class Classroom(models.Model):
     def __str__(self):
         return self.name
 
+@admin.register(Classroom)
+class ClassroomAdmin(admin.ModelAdmin):
+
+    
+    def response_add(self, request, obj, post_url_continue=None):
+        
+        return redirect('/teacher/classroom/' + str(obj.id) + '/')
+        
+
+    def response_change(self, request, obj):
+        print('what is classroom.id', obj.id)
+        return redirect('/teacher/classroom/' + str(obj.id) + '/')
+
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
@@ -33,10 +46,11 @@ class StudentAdmin(admin.ModelAdmin):
     list_display = ('user', 'classroom')
     
     def response_add(self, request, obj, post_url_continue=None):
-        return redirect('/teacher/classroom')
+        return redirect('/teacher/classroom/' + str(obj.classroom_id) + '/')
 
     def response_change(self, request, obj):
-        return redirect('/teacher/classroom')
+        print('what is obj', obj.classroom_id)
+        return redirect('/teacher/classroom/' + str(obj.classroom_id) + '/' + str(obj.id) + '/')
 
 
 # class TeacherAdmin(Student, admin.ModelAdmin):
