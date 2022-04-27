@@ -293,7 +293,10 @@ multiplication_lesson = [
     },{
         'num1': 7,
         'num2': 12
-    },
+    },{
+        'num1': 7,
+        'num2': 1
+    }
 ],
 
 [
@@ -511,3 +514,5 @@ multiplication_lesson = [
     }
 ]
 ]
+
+animal = ['img/Bear.png', 'img/Cat.png', 'img/Fox.png', 'img/Koala.png', 'img/Panda.png', 'img/Penguin.png', 'img/Rabbit.png', 'img/sheep.png', "img/Sloth.png", 'img/Turtle.png', 'img/Zebra.png']

@@ -10,7 +10,7 @@ from django.utils.decorators import method_decorator
 from django.forms import ModelChoiceField, IntegerField, MultipleChoiceField
 from .forms import LoginForm
 from .models import Student, Classroom
-from .lessons import multiplication_lesson
+from .lessons import multiplication_lesson, animal
 from django import forms
 import time
 import array
@@ -98,14 +98,8 @@ def game(request):
     current_user = request.user
     student = Student.objects.get(user_id = current_user.id)
     j = len(student.lessons_completed)
-    # letter = ["a","b","c","d","e","f","g","h","i","j"]
-    # picture = letter[correct]
+    animal_pic = animal[j]
     if request.method == 'POST':
-        # global n
-        # global correct
-        # global game_complete
-        # global tic
-        # global counter
         letter = ["a","b","c","d","e","f","g","h","i","j","k","l","l"]
         num1 = multiplication_lesson[j][n]['num1']
         num2 = multiplication_lesson[j][n]['num2']
@@ -134,6 +128,8 @@ def game(request):
         current_user = request.user
         student = Student.objects.get(user_id = current_user.id)
         j = len(student.lessons_completed)
+        animal_pic = animal[j]
+        print(type(animal_pic))
         game_complete = False
         n = 1
         answer1 = 0
@@ -146,7 +142,7 @@ def game(request):
         problem_answer = str((num1 * num3))
         tic = time.perf_counter()
         print("THIS IS ON LOAD", num1, num2, tic)
-    return render (request, 'student/game.html', {'multiplication_lesson' : multiplication_lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter, 'picture':picture})
+    return render (request, 'student/game.html', {'multiplication_lesson' : multiplication_lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter, 'picture':picture, 'animal_pic': animal_pic})
 
 
 

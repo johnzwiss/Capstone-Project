@@ -2,7 +2,7 @@
 {% block content %}
     Welcome Student!
     {% load static %}
-   <img class = {{picture}} src="{% static 'img/Sheep.png' %}" alt="Sheep with flute">
+   <img class = {{picture}} src="{% static '{{animal_pic}}' %}" alt={{animal_pic}}>
     {% if game_complete %}
     <h1 > Game Complete </h1>
     <h3> You got {{correct}} correct in {{counter}} seconds!</h3>
