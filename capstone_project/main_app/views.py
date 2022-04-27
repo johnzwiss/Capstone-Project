@@ -86,6 +86,7 @@ tic = None
 n = 1
 correct = 0
 game_complete = False
+lesson_pass = False
 counter = None
 
 
@@ -95,6 +96,7 @@ def game(request):
     global game_complete
     global tic
     global counter
+    global lesson_pass
     current_user = request.user
     student = Student.objects.get(user_id = current_user.id)
     j = len(student.lessons_completed)
@@ -114,13 +116,23 @@ def game(request):
         picture = letter[correct]
         n += 1
         print(n)
-        if n > 12:
+        if n > 12 and correct > 10:
             game_complete = True
+            lesson_pass = True
             toc = time.perf_counter()
             counter = str(round((toc - tic), 2))
             tracker = (len(student.lessons_completed) + 1)
             score = str(round(correct/12 * 100, 2))
             student.lessons_completed.append(tracker)
+            student.results.append('Score: ' + score + '%' ' Time: ' + counter)
+            student.save()
+        elif n > 12 and correct <= 10:
+            game_complete = True
+            toc = time.perf_counter()
+            counter = str(round((toc - tic), 2))
+            tracker = (len(student.lessons_completed) + 1)
+            score = str(round(correct/12 * 100, 2))
+            student.lessons_attempted.append(tracker)
             student.results.append('Score: ' + score + '%' ' Time: ' + counter)
             student.save()
             
@@ -142,7 +154,7 @@ def game(request):
         problem_answer = str((num1 * num3))
         tic = time.perf_counter()
         print("THIS IS ON LOAD", num1, num2, tic)
-    return render (request, 'student/game.html', {'multiplication_lesson' : multiplication_lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter, 'picture':picture, 'animal_pic': animal_pic})
+    return render (request, 'student/game.html', {'multiplication_lesson' : multiplication_lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter, 'picture':picture, 'animal_pic': animal_pic, 'lesson_pass':lesson_pass})
 
 
 
