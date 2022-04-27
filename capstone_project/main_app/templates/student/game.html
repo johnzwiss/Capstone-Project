@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
     Welcome Student!
+    {% load static %}
+   <img class = {{picture}} src="{% static 'img/Sheep.png' %}" alt="Sheep with flute">
     {% if game_complete %}
-    <h1> Game Complete </h1>
+    <h1 > Game Complete </h1>
     <h3> You got {{correct}} correct in {{counter}} seconds!</h3>
     {%else%}
     <div class="container row center-align">
@@ -22,6 +24,7 @@
             {%endif%}
             <p>Amount correct: {{correct}}</p>
           </div>
+
       </div>
       {%endif%}
 {% endblock %}
