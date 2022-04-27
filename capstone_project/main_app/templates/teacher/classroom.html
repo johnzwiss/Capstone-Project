@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2>Hello {{user.username}}!</h2> 
-    
-    
+
+
     <div class="container row center-align">
         {% for classrooms in classrooms %}
            <h7> Class Name:  <a href="{{classrooms.id}}">{{classrooms.name}}</a> </h7> <br/>
         {% endfor %}
     </div>
 
-    <a href="create">Create a Classroom</a>
+    <a href="/admin/main_app/classroom/add/">Create a Classroom</a>
 
 
 {% endblock %}

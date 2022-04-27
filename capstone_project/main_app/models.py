@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
+from django.contrib import admin
 from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
@@ -22,5 +23,9 @@ class Student(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+@admin.register(Student)
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'classroom')
 
 

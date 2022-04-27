@@ -7,10 +7,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.utils.decorators import method_decorator
-from django.forms import ModelChoiceField
+from django.forms import ModelChoiceField, IntegerField, MultipleChoiceField
 from .forms import LoginForm
 from .models import Student, Classroom
 from .lessons import multiplication_lesson
+from django import forms
 import time
 import array
 
@@ -144,6 +145,17 @@ def student_welcome(request, student_id):
     print(student.lessons_completed)
     return render(request, 'student/welcome.html', {'student': student})
 
+# Student Results View
+def student_results(request):
+    # get the students data based off of student id
+    current_user = request.user
+    student = Student.objects.get(user_id = current_user.id)
+
+    print('what is classroom_id from student', student.lessons_completed)
+
+    # render the student show view
+    return render (request, 'student/student_results.html', {'student': student})
+
 
 # Teacher View
 @user_passes_test(lambda user: user.is_staff)
@@ -221,10 +233,16 @@ class StudentCreate(UserPassesTestMixin, CreateView):
 
 
 # @user_passes_test(lambda user: user.is_staff)
-class StudentUpdate(UserPassesTestMixin, UpdateView):
+class StudentUpdate(UserPassesTestMixin, UpdateView,):
 
+    all_classrooms = ('yes', 'yes'), ('no', 'no') #Classroom.objects.all()
+
+    #
     model= Student
     fields = ['classroom','lessons_completed', 'results' ]
+    print('what is all_classrooms', all_classrooms)
+ 
+   
   
 
     def test_func(self):
