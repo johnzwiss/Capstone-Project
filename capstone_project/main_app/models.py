@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User, Group
 from django.contrib import admin
 from django.contrib.postgres.fields import ArrayField
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 
 # Create your models here.
 
@@ -24,8 +26,22 @@ class Student(models.Model):
     def __str__(self):
         return str(self.user)
 
+
+
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
     list_display = ('user', 'classroom')
+    
+    def response_add(self, request, obj, post_url_continue=None):
+        return redirect('/teacher/classroom')
+
+    def response_change(self, request, obj):
+        return redirect('/teacher/classroom')
 
 
+# class TeacherAdmin(Student, admin.ModelAdmin):
+#     def response_add(self, request, obj, post_url_continue=None):
+#         return redirect('/teacher/classroom')
+
+#     def response_change(self, request, obj):
+#         return redirect('/teacher/classroom')
