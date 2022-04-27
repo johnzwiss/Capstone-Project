@@ -15,6 +15,10 @@ body {
     /* grid-column-gap: 5px; */
   }
 
+.nav-wrapper {
+    background-color: #8bc34a;
+}
+
 /* .results_table {
     width: 100%;
 } */
