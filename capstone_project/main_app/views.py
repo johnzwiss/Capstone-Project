@@ -90,15 +90,23 @@ counter = None
 
 
 def game(request):
+    global n
+    global correct
+    global game_complete
+    global tic
+    global counter
     current_user = request.user
     student = Student.objects.get(user_id = current_user.id)
     j = len(student.lessons_completed)
+    # letter = ["a","b","c","d","e","f","g","h","i","j"]
+    # picture = letter[correct]
     if request.method == 'POST':
-        global n
-        global correct
-        global game_complete
-        global tic
-        global counter
+        # global n
+        # global correct
+        # global game_complete
+        # global tic
+        # global counter
+        letter = ["a","b","c","d","e","f","g","h","i","j","k","l","l"]
         num1 = multiplication_lesson[j][n]['num1']
         num2 = multiplication_lesson[j][n]['num2']
         num3 = multiplication_lesson[j][n - 1]['num2']
@@ -109,6 +117,7 @@ def game(request):
             answer1 = 0
         if answer1 == problem_answer:
             correct +=1
+        picture = letter[correct]
         n += 1
         print(n)
         if n > 12:
@@ -129,13 +138,15 @@ def game(request):
         n = 1
         answer1 = 0
         correct = 0
+        letter = ["a","b","c","d","e","f","g","h","i","j"]
+        picture = letter[correct]
         num1 = multiplication_lesson[j][0]['num1']
         num2 = multiplication_lesson[j][0]['num2']
         num3 = multiplication_lesson[j][0 - 1]['num2']
         problem_answer = str((num1 * num3))
         tic = time.perf_counter()
         print("THIS IS ON LOAD", num1, num2, tic)
-    return render (request, 'student/game.html', {'multiplication_lesson' : multiplication_lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter})
+    return render (request, 'student/game.html', {'multiplication_lesson' : multiplication_lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter, 'picture':picture})
 
 
 

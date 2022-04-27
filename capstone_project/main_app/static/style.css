@@ -18,3 +18,91 @@ body {
 /* .results_table {
     width: 100%;
 } */
+
+.a {
+    position: absolute;
+    left: 2%;
+    top: 8%;
+    height: 10%;
+    width: 5%;
+}
+.b {
+    position: absolute;
+    left: 12%;
+    top: 8%;
+    height: 10%;
+    width: 5%;
+    border-style: solid;
+    border-width: 5px;
+    border-color:white;
+}
+.c {
+    position: absolute;
+    left: 22%;
+    top: 8%;
+    height: 10%;
+    width: 5%;
+}
+.d {
+    position: absolute;
+    left: 32%;
+    top: 8%;
+    height: 10%;
+    width: 5%;
+}
+.e {
+    position: absolute;
+    left: 42%;
+    top: 8%;
+    height: 10%;
+    width: 5%;
+}
+.f {
+    position: absolute;
+    left: 52%;
+    top: 8%;
+    height: 10%;
+    width: 5%;
+}
+.g {
+    position: absolute;
+    left: 62%;
+    top: 8%;
+    height: 10%;
+    width: 5%;
+}
+.h {
+    position: absolute;
+    left: 72%;
+    top: 8%;
+    height: 10%;
+    width: 5%;
+}
+.i {
+    position: absolute;
+    left: 82%;
+    top: 8%;
+    height: 10%;
+    width: 5%;
+}
+.j {
+    position: absolute;
+    left: 92%;
+    top: 8%;
+    height: 10%;
+    width: 5%;
+}
+.k {
+    position: absolute;
+    left: 92%;
+    top: 18%;
+    height: 10%;
+    width: 5%;
+}
+.l {
+    position: absolute;
+    left: 92%;
+    top: 28%;
+    height: 10%;
+    width: 5%;
+}
