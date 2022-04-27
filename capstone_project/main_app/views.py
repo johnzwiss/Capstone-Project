@@ -7,10 +7,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.utils.decorators import method_decorator
-from django.forms import ModelChoiceField
+from django.forms import ModelChoiceField, IntegerField, MultipleChoiceField
 from .forms import LoginForm
 from .models import Student, Classroom
 from .lessons import multiplication_lesson
+from django import forms
 import time
 import array
 
@@ -232,10 +233,16 @@ class StudentCreate(UserPassesTestMixin, CreateView):
 
 
 # @user_passes_test(lambda user: user.is_staff)
-class StudentUpdate(UserPassesTestMixin, UpdateView):
+class StudentUpdate(UserPassesTestMixin, UpdateView,):
 
+    all_classrooms = ('yes', 'yes'), ('no', 'no') #Classroom.objects.all()
+
+    #
     model= Student
     fields = ['classroom','lessons_completed', 'results' ]
+    print('what is all_classrooms', all_classrooms)
+ 
+   
   
 
     def test_func(self):
