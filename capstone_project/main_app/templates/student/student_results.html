@@ -7,7 +7,7 @@
     <div class="results">
         <div >          
             <table>
-                <th>Lesson</th>          
+                <th>Lessons Completed</th>          
             {% for lesson in student.lessons_completed %}           
                 <tr>
                     <td>Lesson: {{lesson}}</td>
@@ -19,6 +19,28 @@
             <table class="results_table">
                 <th>Results</th>          
             {% for results in student.results%}
+                <tr>
+                <td>{{results}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="results">
+        <div >          
+            <table>
+                <th>Lessons Attempted</th>          
+            {% for lesson in student.lessons_attempted %}           
+                <tr>
+                    <td>Lesson: {{lesson}}</td>
+                </tr>                 
+            {% endfor %}        
+            </table>
+        </div>
+        <div>
+            <table class="results_table">
+                <th>Results</th>          
+            {% for results in student.attempted_results%}
                 <tr>
                 <td>{{results}}</td>
                 </tr>

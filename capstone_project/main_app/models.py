@@ -36,6 +36,7 @@ class Student(models.Model):
     lessons_completed = ArrayField(base_field=models.CharField(max_length=200, null=True), default=list, blank=True)
     lessons_attempted = ArrayField(base_field=models.CharField(max_length=200, null=True), default=list, blank=True)
     results = ArrayField(base_field=models.CharField(max_length=200, null=True), default=list, blank=True)
+    attempted_results = ArrayField(base_field=models.CharField(max_length=200, null=True), default=list, blank=True)
 
     def __str__(self):
         return str(self.user)
