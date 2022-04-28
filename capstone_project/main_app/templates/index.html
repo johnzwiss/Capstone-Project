@@ -1,8 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h3>Welcome to Tempo Math!</h3>
-<h5>Please sign in to get started</h5>
-<button><a href="/login">Sign in</a></button>
 
+{% if user.is_staff %}
+    <h2>Welcome Back!</h2>
+    <h3>To get started please click the link below!</h3><br/>
+    <h4><a href="/teacher/classroom">Classroom</a></h4>
+{% elif user.is_authenticated %}
+    <h2>Welcome Back!</h2>
+    <h3>To get started please click the link below!</h3> <br/>
+    <h4><a href="/student/welcome/{{user.student.id}}">Game</a></h4>
+{% else %}
+    <h3>Welcome to Tempo Math!</h3>
+    <h5>Please sign in to get started</h5>
+    <a class="waves-effect light-green btn" href="/login">Sign in</a>
+{% endif %}
 {% endblock %}

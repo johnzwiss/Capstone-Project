@@ -9,15 +9,16 @@
 	<body>
 		<nav>
 			<div class="nav-wrapper light-green">
-				<a href="/cats/" class="brand-logo right">TEMPO MATH</a>
+				<a href="/" class="brand-logo right">TEMPO MATH</a>
 				<ul id="nav-mobile" class="left hide-on-med-and-down">
-					{% if user.is_authenticated %}
-						<li><a href="/user/{{user.username}}">Profile</a></li>
-						<li><a href="/logout">Log out</a></li>
+					{% if user.is_staff %}
 						<li><a href="/teacher/classroom"> Classroom</a></li>
-						<li><a href="/student/welcome/{{user.id}}"> Game</a></li>
-						<li><a href="/admin">Admin</a></li>
+						<!-- <li><a href="/admin">Admin</a></li> -->
+						<li><a href="/logout">Log out</a></li>
+					{% elif user.is_authenticated %}
+						<li><a href="/student/welcome/{{user.id}}"> Game</a></li>					
 						<li><a href="/student/results/">My Results</a></li>
+						<li><a href="/logout">Log out</a></li>
 					{% else %}
 						<li><a href="/login">Log in</a></li>
 						<li><a href="/signup">Sign Up</a></li>

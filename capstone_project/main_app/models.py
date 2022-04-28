@@ -30,6 +30,9 @@ class ClassroomAdmin(admin.ModelAdmin):
         print('what is classroom.id', obj.id)
         return redirect('/teacher/classroom/' + str(obj.id) + '/')
 
+    # def response_delete(self, request, obj):
+    #     return redirect('/teacher/classroom/')
+
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)

@@ -74,7 +74,7 @@ def signup_view(request):
             user.is_staff= True
             user.save()
             login(request, user)
-            return HttpResponseRedirect('/user/' + str(user.username))
+            return HttpResponseRedirect('/teacher/classroom/')
     # if the req is a get, then show the form
     else:
         form = UserCreationForm()
@@ -284,3 +284,5 @@ class StudentUpdate(UserPassesTestMixin, UpdateView,):
         return HttpResponseRedirect('/teacher/classroom/' + classroom + '/'+ str(self.object.pk))
 
 #commit
+
+
