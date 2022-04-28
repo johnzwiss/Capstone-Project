@@ -25,7 +25,6 @@ class ClassroomAdmin(admin.ModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
         form.base_fields["user"].initial = request.user.id
-        print(form.base_fields)
         return form
     
     def response_add(self, request, obj, post_url_continue=None):
@@ -61,7 +60,6 @@ class StudentAdmin(admin.ModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
         form.base_fields["user"].label = 'User:(click + to create student account)'
-        print(form.base_fields)
         return form
     
     def response_add(self, request, obj, post_url_continue=None):
