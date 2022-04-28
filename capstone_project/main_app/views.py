@@ -102,11 +102,12 @@ def game(request):
     global lesson_pass
     current_user = request.user
     student = Student.objects.get(user_id = current_user.id)
+    j= len(student.lessons_completed)
     if j < 12:
         j = len(student.lessons_completed)
-        print("this if statement is hittin")
+        print("this if statement is hittin", j)
     else:
-        j=random.randint(0,11)
+        j= 1
     animal_pic = animal[j]
     if request.method == 'POST':
         letter = ["a","b","c","d","e","f","g","h","i","j","k","l","l"]
@@ -151,12 +152,13 @@ def game(request):
     else:
         current_user = request.user
         student = Student.objects.get(user_id = current_user.id)
+        j = len(student.lessons_completed)
         if j < 12:
             j = len(student.lessons_completed)
-            print("this if statement is hittin")
+            print("this if")
         else:
-            j=random.randint(0,11)
-        print(type(j))
+            j=1
+            print("else")
         animal_pic = animal[j]
         game_complete = False
         n = 1
