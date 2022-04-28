@@ -4,9 +4,10 @@ table, th, td {
 }
 
 body {
-    background-color: whitesmoke;
+    background-color: #eceff1;
     height:100vh;
     width:100vw;
+    justify-content: center;
 }
 
 
@@ -21,84 +22,103 @@ body {
     background-color: #8bc34a;
 }
 
+.page-footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #8bc34a;
+}
+
+#game_card{
+    text-align: center;
+    padding: 10px;
+}
+
+#game_welcome{
+    text-align: center;
+}
+
+#answer{
+    text-align: center;
+}
 /* .results_table {
     width: 100%;
 } */
 
 .a {
     position: absolute;
-    left: 2%;
-    top: 8%;
+    left: 5%;
+    top: 20%;
     height: 10%;
     width: 5%;
 }
 .b {
     position: absolute;
     left: 12%;
-    top: 8%;
+    top: 35%;
     height: 10%;
     width: 5%;
 }
 .c {
     position: absolute;
-    left: 22%;
-    top: 8%;
+    left: 21%;
+    top: 50%;
     height: 10%;
     width: 5%;
 }
 .d {
     position: absolute;
-    left: 32%;
-    top: 8%;
+    left: 28%;
+    top: 65%;
     height: 10%;
     width: 5%;
 }
 .e {
     position: absolute;
-    left: 42%;
-    top: 8%;
+    left: 35%;
+    top: 75%;
     height: 10%;
     width: 5%;
 }
 .f {
     position: absolute;
-    left: 52%;
-    top: 8%;
+    left: 48%;
+    top: 75%;
     height: 10%;
     width: 5%;
 }
 .g {
     position: absolute;
     left: 62%;
-    top: 8%;
+    top: 75%;
     height: 10%;
     width: 5%;
 }
 .h {
     position: absolute;
     left: 72%;
-    top: 8%;
+    top: 65%;
     height: 10%;
     width: 5%;
 }
 .i {
     position: absolute;
-    left: 82%;
-    top: 8%;
+    left: 80%;
+    top: 50%;
     height: 10%;
     width: 5%;
 }
 .j {
     position: absolute;
     left: 92%;
-    top: 8%;
+    top: 40%;
     height: 10%;
     width: 5%;
 }
 .k {
     position: absolute;
-    left: 92%;
-    top: 18%;
+    left: 85%;
+    top: 28%;
     height: 10%;
     width: 5%;
 }
@@ -110,9 +130,3 @@ body {
     width: 5%;
 }
 
-.page-footer{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #8bc34a;
-}
