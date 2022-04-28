@@ -115,7 +115,6 @@ def game(request):
             correct +=1
         picture = letter[correct]
         n += 1
-        print(n)
         if n > 12 and correct > 10:
             game_complete = True
             lesson_pass = True
@@ -133,16 +132,20 @@ def game(request):
             counter = str(round((toc - tic), 2))
             tracker = (len(student.lessons_completed) + 1)
             score = str(round(correct/12 * 100, 2))
-            student.lessons_attempted.append(tracker)
-            student.attempted_results.append('Score: ' + score + '%' ' Time: ' + counter)
-            student.save()
+            if len(student.lessons_attempted) == 0:
+                student.lessons_attempted.append(tracker)
+                student.attempted_results.append('Score: ' + score + '%' ' Time: ' + counter)
+                student.save()
+            else:
+                student.lessons_attempted[0] = tracker
+                student.attempted_results[0] = ('Score: ' + score + '%' ' Time: ' + counter)
+                student.save()
             
     else:
         current_user = request.user
         student = Student.objects.get(user_id = current_user.id)
         j = len(student.lessons_completed)
         animal_pic = animal[j]
-        print(type(animal_pic))
         game_complete = False
         n = 1
         answer1 = 0
@@ -154,7 +157,6 @@ def game(request):
         num3 = multiplication_lesson[j][0 - 1]['num2']
         problem_answer = str((num1 * num3))
         tic = time.perf_counter()
-        print("THIS IS ON LOAD", num1, num2, tic)
     return render (request, 'student/game.html', {'multiplication_lesson' : multiplication_lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter, 'picture':picture, 'animal_pic': animal_pic, 'lesson_pass':lesson_pass})
 
 
@@ -215,3 +217,70 @@ def student_show(request, classroom_id, student_id):
     # render the student show view
     return render (request, 'teacher/student_show.html', {'student': student})
 
+class ClassroomCreate(UserPassesTestMixin, CreateView): 
+    model = Classroom
+    fields = ['name']
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def form_valid(self, form):
+    # creating an object from the form
+        self.object = form.save(commit=False)
+        # adding a user to that object
+        self.object.user = self.request.user
+        # saving the object in the db
+        self.object.save()
+        # redirecting to the main index page
+        return HttpResponseRedirect('/teacher/classroom/')
+
+
+
+class StudentCreate(UserPassesTestMixin, CreateView):
+    model = Student
+    fields = "__all__"
+   
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def form_valid(self, form):
+    # creating an object from the form
+        self.object = form.save(commit=False)
+        # adding a user to that object
+        self.object.user = self.request.user
+        # saving the object in the db
+        self.object.save()
+        # redirecting to the main index page
+        return HttpResponseRedirect('/teacher/classroom/')
+
+
+# @user_passes_test(lambda user: user.is_staff)
+class StudentUpdate(UserPassesTestMixin, UpdateView,):
+
+    all_classrooms = ('yes', 'yes'), ('no', 'no') #Classroom.objects.all()
+
+    #
+    model= Student
+    fields = ['classroom','lessons_completed', 'results' ]
+    print('what is all_classrooms', all_classrooms)
+ 
+   
+  
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    # now we use a function to determine if our form data is valid
+    def form_valid(self, form):
+        # commit=False is useful when we're getting data from a form
+        # but we need to populate with some non-null data
+        # saving with commit=False gets us a model object, then we can add our extra data and save
+        self.object = form.save(commit=False)
+        self.object.save()
+
+        classroom = str(self.object.classroom_id)
+        # print('what is self.object', self.object.classroom_id)
+        # pk is the primary key, aka the id of the object
+        return HttpResponseRedirect('/teacher/classroom/' + classroom + '/'+ str(self.object.pk))
+
+#commit
