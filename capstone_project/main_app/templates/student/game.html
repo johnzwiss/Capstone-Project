@@ -1,30 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
-{% load static %}
-<img class = a src={% static 'img/Stone.png' %} alt="Stepping Stone">
-<img class = b src={% static 'img/Stone.png' %} alt="Stepping Stone">
-<img class = c src={% static 'img/Stone.png' %} alt="Stepping Stone">
-<img class = d src={% static 'img/Stone.png' %} alt="Stepping Stone">
-<img class = e src={% static 'img/Stone.png' %} alt="Stepping Stone">
-<img class = f src={% static 'img/Stone.png' %} alt="Stepping Stone">
-<img class = g src={% static 'img/Stone.png' %} alt="Stepping Stone">
-<img class = h src={% static 'img/Stone.png' %} alt="Stepping Stone">
-<img class = i src={% static 'img/Stone.png' %} alt="Stepping Stone">
-<img class = j src={% static 'img/Stone.png' %} alt="Stepping Stone">
-<!-- <img class = k src={% static 'img/Stone.png' %} alt="Stepping Stone"> -->
-<img class = k src={% static 'img/Podium.png' %} alt="Podium">
-<div class ="row">
-    <div class = "col s12" id="game_welcome"><h1>Welcome Student!</h1></div>
-    {% load static %}
-   <!-- <img class = {{picture}} src="{% static 'img/' %}{{animal_pic}}" alt={{animal_pic}}> -->
+
+   
     {% if game_complete and lesson_pass %}
-    <h1 > Game Complete </h1>
+    {% load static %}
+    <img class = animal_pass src="{% static 'img/' %}{{animal_pic}}" alt={{animal_pic}}>
+    <img class = podium_pass src={% static 'img/Podium.png' %} alt="Podium">
+    <h1 > Congratulations!</h1>
     <h3> You got {{correct}} correct in {{counter}} seconds!</h3>
+    <a href="/student/game">Next Lesson</a>
     {%elif game_complete and not lesson_pass %}
     <h1>Game Complete</h1>
     <h3> You got {{correct}} correct in {{counter}} seconds!</h3>
     <a href="/student/game">Please Try Again</a> 
     {%else%}
+    {% load static %}
+<img class = stonea src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = stoneb src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = stonec src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = stoned src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = stonee src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = stonef src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = stoneg src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = stoneh src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = stonei src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = stonej src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = stonek src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = stonel src={% static 'img/Podium.png' %} alt="Podium">
+<img class = {{picture}} src="{% static 'img/' %}{{animal_pic}}" alt={{animal_pic}}>
+<div class ="row">
+    <div class = "col s12" id="game_welcome"><h1>Welcome Student!</h1></div>
+    {% load static %}
     <!-- <div class="container row center-align"> -->
         <div class ="row">
             <div class = "col s4 offset-s4">
