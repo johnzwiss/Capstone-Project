@@ -41,6 +41,19 @@ body {
 #answer{
     text-align: center;
 }
+#submit{
+    background-color: #8bc34a;
+    color:#eceff1;
+    border:#8bc34a
+}
+
+#welcome_card{
+    background-color: #8bc34a;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20%;
+    color:white;
+}
 .animal_pass{
     position:absolute;
     left:40%;
@@ -54,7 +67,6 @@ body {
     height:36%;
     width:30%;
     z-index: 1;
-
 }
 /* .results_table {
     width: 100%;
