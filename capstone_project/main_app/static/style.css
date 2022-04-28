@@ -116,3 +116,11 @@ body {
     width: 100%;
     background-color: #8bc34a;
 }
+
+.classroom_index {
+    width: 300px;
+}
+
+.submit {
+    background-color: #8bc34a;
+}
