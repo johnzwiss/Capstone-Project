@@ -5,6 +5,8 @@ table, th, td {
 
 body {
     background-color: whitesmoke;
+    height:100vh;
+    width:100vw;
 }
 
 
@@ -106,4 +108,11 @@ body {
     top: 28%;
     height: 10%;
     width: 5%;
+}
+
+.page-footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #8bc34a;
 }
