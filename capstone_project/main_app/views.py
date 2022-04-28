@@ -12,8 +12,9 @@ from .forms import LoginForm
 from .models import Student, Classroom
 from .lessons import multiplication_lesson, animal
 from django import forms
-import time
-import array
+import time, array, random
+
+
 
 # Create your views here.
 
@@ -88,9 +89,11 @@ correct = 0
 game_complete = False
 lesson_pass = False
 counter = None
+j=0
 
 
 def game(request):
+    global j
     global n
     global correct
     global game_complete
@@ -99,7 +102,11 @@ def game(request):
     global lesson_pass
     current_user = request.user
     student = Student.objects.get(user_id = current_user.id)
-    j = len(student.lessons_completed)
+    if j < 12:
+        j = len(student.lessons_completed)
+        print("this if statement is hittin")
+    else:
+        j=random.randint(0,11)
     animal_pic = animal[j]
     if request.method == 'POST':
         letter = ["a","b","c","d","e","f","g","h","i","j","k","l","l"]
@@ -144,7 +151,12 @@ def game(request):
     else:
         current_user = request.user
         student = Student.objects.get(user_id = current_user.id)
-        j = len(student.lessons_completed)
+        if j < 12:
+            j = len(student.lessons_completed)
+            print("this if statement is hittin")
+        else:
+            j=random.randint(0,11)
+        print(type(j))
         animal_pic = animal[j]
         game_complete = False
         n = 1
