@@ -3,13 +3,15 @@
     <h2>Hello {{user.username}}!</h2> 
 
 
-    <div class="container row center-align">
+    <div class="classroom_index">
         {% for classrooms in classrooms %}
+            <hr>
            <h7> Class Name:  <a href="{{classrooms.id}}">{{classrooms.name}}</a> </h7> <br/>
         {% endfor %}
+        <hr>
     </div>
 
-    <a href="/admin/main_app/classroom/add/">Create a Classroom</a>
+    <a class="waves-effect light-green btn" href="/admin/main_app/classroom/add/">Create a Classroom</a>
 
 
 {% endblock %}
