@@ -1,8 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
-    Welcome Student!
+{% load static %}
+<img class = a src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = b src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = c src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = d src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = e src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = f src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = g src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = h src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = i src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<img class = j src={% static 'img/Stone.png' %} alt="Stepping Stone">
+<!-- <img class = k src={% static 'img/Stone.png' %} alt="Stepping Stone"> -->
+<img class = k src={% static 'img/Podium.png' %} alt="Podium">
+<div class ="row">
+    <div class = "col s12" id="game_welcome"><h1>Welcome Student!</h1></div>
     {% load static %}
-   <img class = {{picture}} src="{% static 'img/' %}{{animal_pic}}" alt={{animal_pic}}>
+   <!-- <img class = {{picture}} src="{% static 'img/' %}{{animal_pic}}" alt={{animal_pic}}> -->
     {% if game_complete and lesson_pass %}
     <h1 > Game Complete </h1>
     <h3> You got {{correct}} correct in {{counter}} seconds!</h3>
@@ -11,8 +25,10 @@
     <h3> You got {{correct}} correct in {{counter}} seconds!</h3>
     <a href="/student/game">Please Try Again</a> 
     {%else%}
-    <div class="container row center-align">
-          <div class="card teal lighten-2 col s6">
+    <!-- <div class="container row center-align"> -->
+        <div class ="row">
+            <div class = "col s4 offset-s4">
+          <div class="card" id="game_card">
               <h3> {{num1}} </h3>
               <h3>X</h3>
               <h3>{{num2}}</h3>
@@ -28,7 +44,11 @@
             {%endif%}
             <p>Amount correct: {{correct}}</p>
           </div>
+        </div>
+        </div>
 
-      </div>
+      <!-- </div> -->
+    </div>
+
       {%endif%}
 {% endblock %}
