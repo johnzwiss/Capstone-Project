@@ -27,6 +27,11 @@
     <a class="waves-effect light-green btn" href="/teacher/classroom">Back</a>
     <a class="waves-effect light-green btn" href="/admin/main_app/classroom/{{classroom.id}}/change/">Edit</a>
     <a class="waves-effect light-green btn" href="/admin/main_app/student/add/">Add a student</a>
-   
+
+    <audio controls autoplay>
+        {% load static %}
+        <source src={% static 'audio/snare.wav' %} type="audio/wav">
+        <!-- Your browser does not support the audio element. -->
+    </audio>
 
 {% endblock %}
