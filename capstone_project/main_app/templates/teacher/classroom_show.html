@@ -8,20 +8,25 @@
         <table>
             <tr>
                 <th>Student Name</th>
-                <th>Last Lesson Completed</th>
-                <th>Most Recent Score</th>
+                <th>Progress</th>
+                <th>Results</th>
+                <th>Latest Failed Attempt</th>
+                <th>Results</th>
             </tr>
             {% for student in students%}
                 <tr>
                     <td><a href="{{student.id}}">{{student.user}}</a></td>
                     <td>Lesson: {{student.lessons_completed | last}}</td>
                     <td>{{student.results | last}}</td>
+                    <td>Lesson: {{student.lessons_attempted | last}}</td>
+                    <td>{{student.attempted_results | last}}</td>
                 </tr>
             {% endfor %}
         </table>
     </div>
-    <a class="waves-effect waves-light btn-small" href="/teacher/classroom">Back</a>
-    <a href="/admin/main_app/classroom/{{classroom.id}}/change/">Edit</a>
-
+    <a class="waves-effect light-green btn" href="/teacher/classroom">Back</a>
+    <a class="waves-effect light-green btn" href="/admin/main_app/classroom/{{classroom.id}}/change/">Edit</a>
+    <a class="waves-effect light-green btn" href="/admin/main_app/student/add/">Add a student</a>
+   
 
 {% endblock %}
