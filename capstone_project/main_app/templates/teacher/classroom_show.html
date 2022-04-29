@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
+
+<div class="teacher">
+
     <h2>Hello {{user.username}}!</h2> 
     <h4> Class Name : {{classroom}} </h3>
     
 
-    <div class="container row center-align">
+    <div >
         <table>
             <tr>
                 <th>Student Name</th>
@@ -27,13 +30,8 @@
     <a class="waves-effect light-green btn" href="/teacher/classroom">Back</a>
     <a class="waves-effect light-green btn" href="/admin/main_app/classroom/{{classroom.id}}/change/">Edit</a>
     <a class="waves-effect light-green btn" href="/admin/main_app/student/add/">Add a student</a>
+</div>
 
-
-    <!-- <audio controls autoplay>
-        {% load static %}
-        <source src={% static 'audio/snare.wav' %} type="audio/wav">
-        Your browser does not support the audio element.
-    </audio> -->
 
 
 {% endblock %}
