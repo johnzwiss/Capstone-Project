@@ -4,7 +4,7 @@
    
     {% if game_complete and lesson_pass %}
     {% load static %}
-    <img class = animal_pass src="{% static 'img/' %}{{animal_pic}}" alt={{animal_pic}}>
+    <img class = animal_pass src="{% static 'img/' %}{{animal_pic}}.png" alt={{animal_pic}}>
     <img class = podium_pass src={% static 'img/Podium.png' %} alt="Podium">
     <h1 > Congratulations!</h1>
     <h3> You got {{correct}} correct in {{counter}} seconds!</h3>
