@@ -4,7 +4,7 @@
    
     {% if game_complete and lesson_pass %}
     {% load static %}
-    <img class = animal_pass src="{% static 'img/' %}{{animal_pic}}" alt={{animal_pic}}>
+    <img class = animal_pass src="{% static 'img/' %}{{animal_pic}}.png" alt={{animal_pic}}>
     <img class = podium_pass src={% static 'img/Podium.png' %} alt="Podium">
     <h1 > Congratulations!</h1>
     <h3> You got {{correct}} correct in {{counter}} seconds!</h3>
@@ -32,7 +32,7 @@
 <img class = stonej src={% static 'img/Stone.png' %} alt="Stepping Stone">
 <img class = stonek src={% static 'img/Stone.png' %} alt="Stepping Stone">
 <img class = stonel src={% static 'img/Podium.png' %} alt="Podium">
-<img class = {{picture}} src="{% static 'img/' %}{{animal_pic}}" alt={{animal_pic}}>
+<img class = {{picture}} src="{% static 'img/' %}{{animal_pic}}.png" alt={{animal_pic}}>
 <div class ="row">
     <div class = "col s12" id="game_welcome"><h1>Welcome {{student.user}}!</h1></div>
     {% load static %}

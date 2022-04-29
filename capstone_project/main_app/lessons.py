@@ -520,4 +520,4 @@ animal = ['Bear', 'Cat', 'Fox', 'Koala', 'Panda', 'Penguin', 'Rabbit','Raccoon',
 
 
 
-sound = ['cello.wav', 'violin.wav', 'harp.wav', 'accordian.wav', 'maraka.wav', 'saxophone.wav', 'snare.wav', 'acoustic_guitar.wav', 'flute.wav', 'uke.wav', 'bango.wav', 'electric_guitar.wav', 'cello.wav']  
+sound = ['cello.wav', 'violin.wav', 'harp.wav', 'accordian.wav', 'maraka.wav', 'saxophone.wav', 'snare.wav', 'acoustic_guitar.wav', 'flute.wav', 'uke.wav', 'banjo.wav', 'electric_guitar.wav', 'cello.wav']  
