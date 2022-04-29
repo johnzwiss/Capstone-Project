@@ -10,7 +10,7 @@ from django.utils.decorators import method_decorator
 from django.forms import ModelChoiceField, IntegerField, MultipleChoiceField
 from .forms import LoginForm
 from .models import Student, Classroom
-from .lessons import multiplication_lesson, animal
+from .lessons import multiplication_lesson, animal, sound
 from django import forms
 import time, array, random
 
@@ -115,6 +115,8 @@ def game(request):
         j= 1
     ## set animal picture based on which lesson is being done 
     animal_pic = animal[j]
+    animal_sound = sound[j]
+    print(animal_sound)
     ## this happens when a student enters an answer
     if request.method == 'POST':
     ## array of class names for positioning/moving animal 
@@ -185,6 +187,7 @@ def game(request):
             j=1
             print("else")
         animal_pic = animal[j]
+        animal_sound = sound[j]
         game_complete = False
         n = 1
         answer1 = 0
@@ -197,21 +200,25 @@ def game(request):
         problem_answer = str((num1 * num3))
         tic = time.perf_counter()
     ## render the show function 
-    return render (request, 'student/game.html', {'multiplication_lesson' : multiplication_lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter, 'picture':picture, 'animal_pic': animal_pic, 'lesson_pass':lesson_pass})
+    return render (request, 'student/game.html', {'multiplication_lesson' : multiplication_lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter, 'picture':picture, 'animal_pic': animal_pic, 'lesson_pass':lesson_pass, 'animal_sound':animal_sound})
 
 
 
 # Student Welcome Page
 
 def student_welcome(request, student_id):
+    letter = ["a","b","c","d","e","f","g","h","i","j"]
 ## set user to current 
     current_user = request.user
 
     # queries the database to get the current user
     student = Student.objects.get(user_id = current_user.id)
-    # print(student.lessons_completed)
 
-    return render(request, 'student/welcome.html', {'student': student})
+    x = slice(len(student.lessons_completed))
+    animal_array = animal[x]
+## render student welcome view
+    return render(request, 'student/welcome.html', {'student': student,  'animal_array': animal_array, 'letter':letter})
+
 
 # Student Results View
 def student_results(request):
@@ -221,10 +228,8 @@ def student_results(request):
     # queries the database to get the current user
     student = Student.objects.get(user_id = current_user.id)
 
-    print('what is classroom_id from student', student.lessons_completed)
-
     # render the student show view
-    return render (request, 'student/student_results.html', {'student': student})
+    return render (request, 'student/student_results.html', {'student': student} )
 
 
 # Teacher View

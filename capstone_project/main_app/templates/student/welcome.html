@@ -12,4 +12,10 @@
             </div>
           </div>
       </div>
+      {% for animal in animal_array %}
+      {%load static %}
+                <img class = {{animal}} src="{% static 'img/' %}{{animal}}.png" alt="image">
+      {% endfor %}
+        
 {% endblock %}
+

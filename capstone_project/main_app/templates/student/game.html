@@ -14,7 +14,12 @@
     <h3> You got {{correct}} correct in {{counter}} seconds!</h3>
     <a class="waves-effect blue-grey darken-2 btn" href="../../student/game">Please Try Again</a> 
     {%else%}
-    {% load static %}
+    <!-- {% load static %} -->
+     <audio class="sound" controls autoplay>
+        {% load static %}
+        <source class={{picture}} src="{% static 'audio/' %}{{animal_sound}}" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
 <img class = stonea src={% static 'img/Stone.png' %} alt="Stepping Stone">
 <img class = stoneb src={% static 'img/Stone.png' %} alt="Stepping Stone">
 <img class = stonec src={% static 'img/Stone.png' %} alt="Stepping Stone">

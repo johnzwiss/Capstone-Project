@@ -516,4 +516,8 @@ multiplication_lesson = [
 ]
 ]
 
-animal = ['Bear.png', 'Cat.png', 'Fox.png', 'Koala.png', 'Panda.png', 'Penguin.png', 'Rabbit.png','Raccoon.png', 'sheep.png', "Sloth.png", 'Turtle.png', 'Zebra.png','Bear.png']
+animal = ['Bear', 'Cat', 'Fox', 'Koala', 'Panda', 'Penguin', 'Rabbit','Raccoon', 'sheep', "Sloth", 'Turtle', 'Zebra','Bear']
+
+
+
+sound = ['cello.wav', 'violin.wav', 'harp.wav', 'accordian.wav', 'maraka.wav', 'saxophone.wav', 'snare.wav', 'acoustic_guitar.wav', 'flute.wav', 'uke.wav', 'bango.wav', 'electric_guitar.wav', 'cello.wav']  
