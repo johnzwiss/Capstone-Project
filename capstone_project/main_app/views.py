@@ -44,6 +44,7 @@ def login_view(request):
                     # use django's built in login function
                     login(request, user)
                     return HttpResponseRedirect('/teacher/classroom')
+                # if user isn't staff then they are directed to the student page
                 elif user.is_active:
                     login(request, user)
                     return HttpResponseRedirect('/student/welcome/' + str(user.id))
@@ -202,22 +203,29 @@ def game(request):
     return render (request, 'student/game.html', {'multiplication_lesson' : multiplication_lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter, 'picture':picture, 'animal_pic': animal_pic, 'lesson_pass':lesson_pass, 'animal_sound':animal_sound})
 
 
-## Student welcome view 
+
+# Student Welcome Page
+
 def student_welcome(request, student_id):
     letter = ["a","b","c","d","e","f","g","h","i","j"]
 ## set user to current 
     current_user = request.user
-## get student data and object 
+
+    # queries the database to get the current user
     student = Student.objects.get(user_id = current_user.id)
+
     x = slice(len(student.lessons_completed))
     animal_array = animal[x]
 ## render student welcome view
     return render(request, 'student/welcome.html', {'student': student,  'animal_array': animal_array, 'letter':letter})
 
+
 # Student Results View
 def student_results(request):
     # get the students data based off of student id
     current_user = request.user
+
+    # queries the database to get the current user
     student = Student.objects.get(user_id = current_user.id)
 
     # render the student show view
@@ -243,6 +251,7 @@ def classroom_show(request, classroom_id):
 
     # query to get the classroom based off url id
     classroom = Classroom.objects.get(id=classroom_id)
+
     # query to get the students from that classroom 
     students = Student.objects.filter(classroom_id = classroom_id)
 
@@ -257,77 +266,80 @@ def student_show(request, classroom_id, student_id):
     # get the students data based off of student id
     student = Student.objects.get(id=student_id)
 
-    print('what is classroom_id from student', student.lessons_completed)
+    # print('what is classroom_id from student', student.lessons_completed)
 
     # render the student show view
     return render (request, 'teacher/student_show.html', {'student': student})
 
-class ClassroomCreate(UserPassesTestMixin, CreateView): 
-    model = Classroom
-    fields = ['name']
 
-    def test_func(self):
-        return self.request.user.is_staff
+#################################### BELOW IS NOT CURRENTLY IN USE ###############################
 
-    def form_valid(self, form):
-    # creating an object from the form
-        self.object = form.save(commit=False)
-        # adding a user to that object
-        self.object.user = self.request.user
-        # saving the object in the db
-        self.object.save()
-        # redirecting to the main index page
-        return HttpResponseRedirect('/teacher/classroom/')
+# class ClassroomCreate(UserPassesTestMixin, CreateView): 
+#     model = Classroom
+#     fields = ['name']
+
+#     def test_func(self):
+#         return self.request.user.is_staff
+
+#     def form_valid(self, form):
+#     # creating an object from the form
+#         self.object = form.save(commit=False)
+#         # adding a user to that object
+#         self.object.user = self.request.user
+#         # saving the object in the db
+#         self.object.save()
+#         # redirecting to the main index page
+#         return HttpResponseRedirect('/teacher/classroom/')
 
 
 
-class StudentCreate(UserPassesTestMixin, CreateView):
-    model = Student
-    fields = "__all__"
+# class StudentCreate(UserPassesTestMixin, CreateView):
+#     model = Student
+#     fields = "__all__"
    
-    def test_func(self):
-        return self.request.user.is_staff
+#     def test_func(self):
+#         return self.request.user.is_staff
 
-    def form_valid(self, form):
-    # creating an object from the form
-        self.object = form.save(commit=False)
-        # adding a user to that object
-        self.object.user = self.request.user
-        # saving the object in the db
-        self.object.save()
-        # redirecting to the main index page
-        return HttpResponseRedirect('/teacher/classroom/')
+#     def form_valid(self, form):
+#     # creating an object from the form
+#         self.object = form.save(commit=False)
+#         # adding a user to that object
+#         self.object.user = self.request.user
+#         # saving the object in the db
+#         self.object.save()
+#         # redirecting to the main index page
+#         return HttpResponseRedirect('/teacher/classroom/')
 
 
-# @user_passes_test(lambda user: user.is_staff)
-class StudentUpdate(UserPassesTestMixin, UpdateView,):
+# # @user_passes_test(lambda user: user.is_staff)
+# class StudentUpdate(UserPassesTestMixin, UpdateView,):
 
-    all_classrooms = ('yes', 'yes'), ('no', 'no') #Classroom.objects.all()
+#     all_classrooms = ('yes', 'yes'), ('no', 'no') #Classroom.objects.all()
 
-    #
-    model= Student
-    fields = ['classroom','lessons_completed', 'results' ]
-    print('what is all_classrooms', all_classrooms)
+#     #
+#     model= Student
+#     fields = ['classroom','lessons_completed', 'results' ]
+#     print('what is all_classrooms', all_classrooms)
  
    
   
 
-    def test_func(self):
-        return self.request.user.is_staff
+#     def test_func(self):
+#         return self.request.user.is_staff
 
-    # now we use a function to determine if our form data is valid
-    def form_valid(self, form):
-        # commit=False is useful when we're getting data from a form
-        # but we need to populate with some non-null data
-        # saving with commit=False gets us a model object, then we can add our extra data and save
-        self.object = form.save(commit=False)
-        self.object.save()
+#     # now we use a function to determine if our form data is valid
+#     def form_valid(self, form):
+#         # commit=False is useful when we're getting data from a form
+#         # but we need to populate with some non-null data
+#         # saving with commit=False gets us a model object, then we can add our extra data and save
+#         self.object = form.save(commit=False)
+#         self.object.save()
 
-        classroom = str(self.object.classroom_id)
-        # print('what is self.object', self.object.classroom_id)
-        # pk is the primary key, aka the id of the object
-        return HttpResponseRedirect('/teacher/classroom/' + classroom + '/'+ str(self.object.pk))
+#         classroom = str(self.object.classroom_id)
+#         # print('what is self.object', self.object.classroom_id)
+#         # pk is the primary key, aka the id of the object
+#         return HttpResponseRedirect('/teacher/classroom/' + classroom + '/'+ str(self.object.pk))
 
-#commit
+# #commit
 
 
