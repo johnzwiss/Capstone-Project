@@ -516,4 +516,4 @@ multiplication_lesson = [
 ]
 ]
 
-animal = ['Bear.png', 'Cat.png', 'Fox.png', 'Koala.png', 'Panda.png', 'Penguin.png', 'Rabbit.png', 'sheep.png', "Sloth.png", 'Turtle.png', 'Zebra.png','Bear.png']
+animal = ['Bear.png', 'Cat.png', 'Fox.png', 'Koala.png', 'Panda.png', 'Penguin.png', 'Rabbit.png','Raccoon.png', 'sheep.png', "Sloth.png", 'Turtle.png', 'Zebra.png','Bear.png']

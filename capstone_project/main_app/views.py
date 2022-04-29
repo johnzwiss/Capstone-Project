@@ -12,8 +12,9 @@ from .forms import LoginForm
 from .models import Student, Classroom
 from .lessons import multiplication_lesson, animal
 from django import forms
-import time
-import array
+import time, array, random
+
+
 
 # Create your views here.
 
@@ -89,21 +90,36 @@ correct = 0
 game_complete = False
 lesson_pass = False
 counter = None
+j=0
 
 
 def game(request):
+    global j
     global n
     global correct
     global game_complete
     global tic
     global counter
     global lesson_pass
+    ## find current user 
     current_user = request.user
+    ## call student object 
     student = Student.objects.get(user_id = current_user.id)
-    j = len(student.lessons_completed)
+    ## set iterator to length of lessons completed by current student
+    j= len(student.lessons_completed)
+    ## if all lessons are completed set students lesson back to 2nd lesson
+    if j < 12:
+        j = len(student.lessons_completed)
+        print("this if statement is hittin", j)
+    else:
+        j= 1
+    ## set animal picture based on which lesson is being done 
     animal_pic = animal[j]
+    ## this happens when a student enters an answer
     if request.method == 'POST':
+    ## array of class names for positioning/moving animal 
         letter = ["a","b","c","d","e","f","g","h","i","j","k","l","l"]
+    ## presenting the numbers a student needs to multiply and checking the answer
         num1 = multiplication_lesson[j][n]['num1']
         num2 = multiplication_lesson[j][n]['num2']
         num3 = multiplication_lesson[j][n - 1]['num2']
@@ -112,40 +128,62 @@ def game(request):
             answer1 = (request.POST["answer"])
         except KeyError:
             answer1 = 0
+    ## if answer is correct counter adds one
         if answer1 == problem_answer:
             correct +=1
+    ## if answer is correct animal picture advances one stone
         picture = letter[correct]
+    ## increase counter to progress to next question
         n += 1
+    ## if student student has answered 12 questions and got 10 correct end the game 
         if n > 12 and correct > 10:
             game_complete = True
             lesson_pass = True
+    ## stop timer
             toc = time.perf_counter()
+    ## calculate time
             counter = str(round((toc - tic), 2))
+    ## update lesson tracker 
             tracker = (len(student.lessons_completed) + 1)
+    ## calculate score and give a percentage 
             score = str(round(correct/12 * 100, 2))
+    ## update student model 
             student.lessons_completed.append(tracker)
             student.results.append('Score: ' + score + '%' ' Time: ' + counter)
             student.save()
+    ## if student finishes game but doesn't pass
         elif n > 12 and correct <= 10:
             game_complete = True
             lesson_pass = False
+    ## stop timer
             toc = time.perf_counter()
+    ## calculate time 
             counter = str(round((toc - tic), 2))
+    ## update lesson tracker 
             tracker = (len(student.lessons_completed) + 1)
+    ## caluclate score in percentage 
             score = str(round(correct/12 * 100, 2))
+    ## if students hasn't attemped any lessons, append lessons attempted 
             if len(student.lessons_attempted) == 0:
                 student.lessons_attempted.append(tracker)
                 student.attempted_results.append('Score: ' + score + '%' ' Time: ' + counter)
                 student.save()
+    ## if student has attempted lessons, replace the lesson appended with the new lesson
             else:
                 student.lessons_attempted[0] = tracker
                 student.attempted_results[0] = ('Score: ' + score + '%' ' Time: ' + counter)
                 student.save()
-            
+    ## Initial load         
     else:
         current_user = request.user
         student = Student.objects.get(user_id = current_user.id)
         j = len(student.lessons_completed)
+        if j < 12:
+            j = len(student.lessons_completed)
+            print("this if")
+        else:
+            j=1
+            print("else")
         animal_pic = animal[j]
         game_complete = False
         n = 1
@@ -158,15 +196,21 @@ def game(request):
         num3 = multiplication_lesson[j][0 - 1]['num2']
         problem_answer = str((num1 * num3))
         tic = time.perf_counter()
+    ## render the show function 
     return render (request, 'student/game.html', {'multiplication_lesson' : multiplication_lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter, 'picture':picture, 'animal_pic': animal_pic, 'lesson_pass':lesson_pass})
 
 
+
 # Student Welcome Page
+
 def student_welcome(request, student_id):
+## set user to current 
     current_user = request.user
+
     # queries the database to get the current user
     student = Student.objects.get(user_id = current_user.id)
     # print(student.lessons_completed)
+
     return render(request, 'student/welcome.html', {'student': student})
 
 # Student Results View

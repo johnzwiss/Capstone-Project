@@ -8,11 +8,11 @@
     <img class = podium_pass src={% static 'img/Podium.png' %} alt="Podium">
     <h1 > Congratulations!</h1>
     <h3> You got {{correct}} correct in {{counter}} seconds!</h3>
-    <a href="/student/game">Next Lesson</a>
+    <a class="waves-effect blue-grey darken-2 btn" href="../../student/game">Next Lesson</a>
     {%elif game_complete and not lesson_pass %}
     <h1>Game Complete</h1>
     <h3> You got {{correct}} correct in {{counter}} seconds!</h3>
-    <a href="/student/game">Please Try Again</a> 
+    <a class="waves-effect blue-grey darken-2 btn" href="../../student/game">Please Try Again</a> 
     {%else%}
     {% load static %}
 <img class = stonea src={% static 'img/Stone.png' %} alt="Stepping Stone">
@@ -29,7 +29,7 @@
 <img class = stonel src={% static 'img/Podium.png' %} alt="Podium">
 <img class = {{picture}} src="{% static 'img/' %}{{animal_pic}}" alt={{animal_pic}}>
 <div class ="row">
-    <div class = "col s12" id="game_welcome"><h1>Welcome Student!</h1></div>
+    <div class = "col s12" id="game_welcome"><h1>Welcome {{student.user}}!</h1></div>
     {% load static %}
     <!-- <div class="container row center-align"> -->
         <div class ="row">
