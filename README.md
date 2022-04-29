@@ -63,5 +63,5 @@ Student Detail Page
 ![Student View](https://i.imgur.com/4CGdaSD.png)
 
 # ERD
-![ERD](https://i.imgur.com/SfR1swT.png)
+![ERD](https://i.imgur.com/Yd9CzDK.png)
 
