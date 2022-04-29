@@ -106,13 +106,14 @@ def game(request):
     ## call student object 
     student = Student.objects.get(user_id = current_user.id)
     ## set iterator to length of lessons completed by current student
-    j= len(student.lessons_completed)
+    # j= len(student.lessons_completed)
     ## if all lessons are completed set students lesson back to 2nd lesson
-    if j < 12:
-        j = len(student.lessons_completed)
-        print("this if statement is hittin", j)
-    else:
-        j= 1
+    # if j < 12:
+    #     j = len(student.lessons_completed)
+    #     print("this if statement is hittin", j)
+    # else:
+    #     j= random.randint(0,11)
+    #     ("top else is running")
     ## set animal picture based on which lesson is being done 
     animal_pic = animal[j]
     animal_sound = sound[j]
@@ -184,8 +185,8 @@ def game(request):
             j = len(student.lessons_completed)
             print("this if")
         else:
-            j=1
-            print("else")
+            j= random.randint(0, 12)
+            print("bottom else is running")
         animal_pic = animal[j]
         animal_sound = sound[j]
         game_complete = False
