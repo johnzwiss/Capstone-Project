@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Hello {{user.username}}!</h2> 
+    
 
+    <div class="teacher" id="classroom_index">
+        <h2>Hello {{user.username}}!</h2> 
 
-    <div class="classroom_index">
         {% for classrooms in classrooms %}
             <hr>
            <h7> Class Name:  <a href="{{classrooms.id}}">{{classrooms.name}}</a> </h7> <br/>
         {% endfor %}
         <hr>
+        <a class="waves-effect light-green btn" href="/admin/main_app/classroom/add/">Create a Classroom</a>
     </div>
 
-    <a class="waves-effect light-green btn" href="/admin/main_app/classroom/add/">Create a Classroom</a>
+   
 
 
 {% endblock %}

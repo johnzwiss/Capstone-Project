@@ -10,13 +10,19 @@ body {
     justify-content: center;
 }
 
+#classroom_index {
+    width: 30em;
+    margin-left: 28%;
+}
 
-.results {
+.results, .results_attempted {
     display: grid;
     grid-template-columns: 200px 200px; 
     grid-template-rows: 200;
+    margin-left: 30%;
     /* grid-column-gap: 5px; */
   }
+
 
 .nav-wrapper {
     background-color: #8bc34a;
@@ -271,3 +277,6 @@ body {
     background-color: #8bc34a;
 }
 
+.teacher {
+    text-align: center;
+}
