@@ -52,6 +52,10 @@ body {
     color:#eceff1;
     border:#8bc34a
 }
+#signin {
+    position:absolute;
+    left: 46%
+}
 
 #welcome_card{
     background-color: #8bc34a;
