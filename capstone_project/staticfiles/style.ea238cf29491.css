@@ -1,0 +1,286 @@
+table, th, td {
+    border: 1px solid black;
+    white-space: nowrap;
+}
+
+body {
+    background-color: #eceff1;
+    height:118vh;
+    width:100vw;
+    justify-content: center;
+}
+
+#classroom_index {
+    width: 30em;
+    margin-left: 28%;
+}
+
+.results, .results_attempted {
+    display: grid;
+    grid-template-columns: 200px 200px; 
+    grid-template-rows: 200;
+    margin-left: 30%;
+    /* grid-column-gap: 5px; */
+  }
+
+
+.nav-wrapper {
+    background-color: #8bc34a;
+}
+
+.page-footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #8bc34a;
+}
+
+#game_card{
+    text-align: center;
+    padding: 10px;
+}
+
+#game_welcome{
+    text-align: center;
+}
+
+#answer{
+    text-align: center;
+}
+#submit{
+    background-color: #8bc34a;
+    color:#eceff1;
+    border:#8bc34a
+}
+#signin {
+    position:absolute;
+    left: 46%
+}
+
+#welcome_card{
+    background-color: #8bc34a;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20%;
+    color:white;
+}
+.animal_pass{
+    position:absolute;
+    left:40%;
+    top:25%;
+    z-index: 2;
+}
+.podium_pass{
+    position:absolute;
+    left: 36%;
+    top: 40%;
+    height:36%;
+    width:30%;
+    z-index: 1;
+}
+
+.sound{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: none;
+}
+
+.logo{
+    width: 30%;
+    height: 45%;
+    position: relative;
+    left: 36%;
+    margin-top: 5%;
+}
+
+.logo-nav{
+    width: 15%;
+    height: 20%;
+}
+/* .results_table {
+    width: 100%;
+} */
+
+.a, .Bear {
+    position: absolute;
+    left: 5%;
+    top: 15%;
+    height: 15%;
+    width: 8%;
+}
+.b, .Cat{
+    position: absolute;
+    left: 12%;
+    top: 30%;
+    height: 15%;
+    width: 8%;
+}
+.c, .Fox{
+    position: absolute;
+    left: 21%;
+    top: 45%;
+    height: 15%;
+    width: 8%;
+}
+.d, .Koala{
+    position: absolute;
+    left: 28%;
+    top: 60%;
+    height: 15%;
+    width: 8%;
+}
+.e, .Panda{
+    position: absolute;
+    left: 35%;
+    top: 70%;
+    height: 15%;
+    width: 8%;
+}
+.f, .Penguin {
+    position: absolute;
+    left: 48%;
+    top: 70%;
+    height: 15%;
+    width: 8%;
+}
+.g, .Rabbit {
+    position: absolute;
+    left: 62%;
+    top: 70%;
+    height: 15%;
+    width: 8%;
+}
+.h, .Raccoon {
+    position: absolute;
+    left: 72%;
+    top: 60%;
+    height: 15%;
+    width: 8%;
+}
+.i, .sheep {
+    position: absolute;
+    left: 80%;
+    top: 45%;
+    height: 15%;
+    width: 8%;
+}
+.j, .Sloth {
+    position: absolute;
+    left: 92%;
+    top: 35%;
+    height: 15%;
+    width: 8%;
+}
+.k, .Turtle {
+    position: absolute;
+    left: 85%;
+    top: 23%;
+    height: 15%;
+    width: 8%;
+}
+.l, .Zebra {
+    position: absolute;
+    left: 75%;
+    top: 26%;
+    height: 15%;
+    width: 8%;
+}
+.stonea {
+    position: absolute;
+    left: 5%;
+    top: 20%;
+    height: 15%;
+    width: 8%;
+}
+.stoneb {
+    position: absolute;
+    left: 12%;
+    top: 35%;
+    height: 15%;
+    width: 8%;
+}
+.stonec {
+    position: absolute;
+    left: 21%;
+    top: 50%;
+    height: 15%;
+    width: 8%;
+}
+.stoned {
+    position: absolute;
+    left: 28%;
+    top: 65%;
+    height: 15%;
+    width: 8%;
+}
+.stonee {
+    position: absolute;
+    left: 35%;
+    top: 75%;
+    height: 15%;
+    width: 8%;
+}
+.stonef {
+    position: absolute;
+    left: 48%;
+    top: 75%;
+    height: 15%;
+    width: 8%;
+}
+.stoneg {
+    position: absolute;
+    left: 62%;
+    top: 75%;
+    height: 15%;
+    width: 8%;
+}
+.stoneh {
+    position: absolute;
+    left: 72%;
+    top: 65%;
+    height: 15%;
+    width: 8%;
+}
+.stonei {
+    position: absolute;
+    left: 80%;
+    top: 50%;
+    height: 15%;
+    width: 8%;
+}
+.stonej {
+    position: absolute;
+    left: 92%;
+    top: 40%;
+    height: 15%;
+    width: 8%;
+}
+.stonek {
+    position: absolute;
+    left: 85%;
+    top: 28%;
+    height: 15%;
+    width: 8%;
+}
+.stonel {
+    position: absolute;
+    left: 75%;
+    top: 28%;
+    height: 15%;
+    width: 8%;
+}
+
+
+
+.classroom_index {
+    width: 300px;
+}
+
+.submit {
+    background-color: #8bc34a;
+}
+
+.teacher {
+    text-align: center;
+}
