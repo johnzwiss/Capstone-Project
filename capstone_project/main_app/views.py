@@ -85,12 +85,12 @@ def signup_view(request):
 
 # game view 
 tic = None
-n = 1
+n = None
 correct = 0
 game_complete = False
 lesson_pass = False
 counter = None
-j=0
+j=None
 
 
 def game(request):
@@ -115,14 +115,17 @@ def game(request):
     #     j= random.randint(0,11)
     #     ("top else is running")
     ## set animal picture based on which lesson is being done 
-    animal_pic = animal[j]
-    animal_sound = sound[j]
-    print(animal_sound)
+    # animal_pic = animal[j]
+    # animal_sound = sound[j]
+    # print(animal_sound)
     ## this happens when a student enters an answer
     if request.method == 'POST':
     ## array of class names for positioning/moving animal 
         letter = ["a","b","c","d","e","f","g","h","i","j","k","l","l"]
         print(j, n)
+        ## set animal picture based on which lesson is being done 
+        animal_pic = animal[j]
+        animal_sound = sound[j]
     ## presenting the numbers a student needs to multiply and checking the answer
         num1 = multiplication_lesson[j][n]['num1']
         num2 = multiplication_lesson[j][n]['num2']
