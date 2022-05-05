@@ -122,6 +122,7 @@ def game(request):
     if request.method == 'POST':
     ## array of class names for positioning/moving animal 
         letter = ["a","b","c","d","e","f","g","h","i","j","k","l","l"]
+        print(j, n)
     ## presenting the numbers a student needs to multiply and checking the answer
         num1 = multiplication_lesson[j][n]['num1']
         num2 = multiplication_lesson[j][n]['num2']
