@@ -86,7 +86,7 @@ def signup_view(request):
 # game view 
 tic = None
 n = None
-correct = 0
+correct = None
 game_complete = False
 lesson_pass = False
 counter = None
