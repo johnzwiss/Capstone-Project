@@ -122,14 +122,14 @@ def game(request):
     if request.method == 'POST':
     ## array of class names for positioning/moving animal 
         letter = ["a","b","c","d","e","f","g","h","i","j","k","l","l"]
-        print(j, n)
+        print(j, student.problem_number)
         ## set animal picture based on which lesson is being done 
         animal_pic = animal[j]
         animal_sound = sound[j]
     ## presenting the numbers a student needs to multiply and checking the answer
-        num1 = multiplication_lesson[j][n]['num1']
-        num2 = multiplication_lesson[j][n]['num2']
-        num3 = multiplication_lesson[j][n - 1]['num2']
+        num1 = multiplication_lesson[j][student.problem_number]['num1']
+        num2 = multiplication_lesson[j][student.problem_number]['num2']
+        num3 = multiplication_lesson[j][student.problem_number - 1]['num2']
         problem_answer = str((num1 * num3))
         try:
             answer1 = (request.POST["answer"])
@@ -137,13 +137,15 @@ def game(request):
             answer1 = 0
     ## if answer is correct counter adds one
         if answer1 == problem_answer:
-            correct +=1
+            student.correct +=1
     ## if answer is correct animal picture advances one stone
-        picture = letter[correct]
+            picture = letter[student.correct]
     ## increase counter to progress to next question
-        n += 1
+        student.problem_number += 1
+        print(student.problem_number)
+        student.save()
     ## if student student has answered 12 questions and got 10 correct end the game 
-        if n > 12 and correct > 10:
+        if student.problem_number > 12 and student.correct > 10:
             game_complete = True
             lesson_pass = True
     ## stop timer
@@ -153,13 +155,13 @@ def game(request):
     ## update lesson tracker 
             tracker = (len(student.lessons_completed) + 1)
     ## calculate score and give a percentage 
-            score = str(round(correct/12 * 100, 2))
+            score = str(round(student.correct/12 * 100, 2))
     ## update student model 
             student.lessons_completed.append(tracker)
             student.results.append('Score: ' + score + '%' ' Time: ' + counter)
             student.save()
     ## if student finishes game but doesn't pass
-        elif n > 12 and correct <= 10:
+        elif student.problem_number > 12 and correct <= 10:
             game_complete = True
             lesson_pass = False
     ## stop timer
@@ -184,7 +186,9 @@ def game(request):
     else:
         current_user = request.user
         student = Student.objects.get(user_id = current_user.id)
+        student.problem_number = 1
         j = len(student.lessons_completed)
+        print(student.problem_number)
         if j < 12:
             j = len(student.lessons_completed)
             print("this if")
@@ -194,18 +198,18 @@ def game(request):
         animal_pic = animal[j]
         animal_sound = sound[j]
         game_complete = False
-        n = 1
         answer1 = 0
-        correct = 0
+        student.correct = 0
         letter = ["a","b","c","d","e","f","g","h","i","j"]
-        picture = letter[correct]
+        picture = letter[student.correct]
         num1 = multiplication_lesson[j][0]['num1']
         num2 = multiplication_lesson[j][0]['num2']
         num3 = multiplication_lesson[j][0 - 1]['num2']
         problem_answer = str((num1 * num3))
         tic = time.perf_counter()
+        student.save()
     ## render the show function 
-    return render (request, 'student/game.html', {'multiplication_lesson' : multiplication_lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter, 'picture':picture, 'animal_pic': animal_pic, 'lesson_pass':lesson_pass, 'animal_sound':animal_sound})
+    return render (request, 'student/game.html', {'multiplication_lesson' : multiplication_lesson, 'n': n, 'answer1' : answer1, 'num1': num1, 'num2': num2, 'problem_answer': problem_answer, 'correct': correct, 'game_complete': game_complete, 'counter': counter, 'picture':picture, 'animal_pic': animal_pic, 'lesson_pass':lesson_pass, 'animal_sound':animal_sound, 'student':student})
 
 
 
