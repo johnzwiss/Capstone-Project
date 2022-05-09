@@ -7,7 +7,7 @@
     <img class = animal_pass src="{% static 'img/' %}{{animal_pic}}.png" alt={{animal_pic}}>
     <img class = podium_pass src={% static 'img/Podium.png' %} alt="Podium">
     <h1 > Congratulations!</h1>
-    <h3> You got {{correct}} correct in {{counter}} seconds!</h3>
+    <h3> You got {{student.correct}} correct in {{counter}} seconds!</h3>
     <a class="waves-effect blue-grey darken-2 btn" href="../../student/game">Next Lesson</a>
     {%elif game_complete and not lesson_pass %}
     <h1>Game Complete</h1>

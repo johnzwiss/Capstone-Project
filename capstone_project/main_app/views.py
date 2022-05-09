@@ -91,9 +91,10 @@ game_complete = False
 lesson_pass = False
 counter = None
 j=None
-
+picture = None
 
 def game(request):
+    global picture
     global j
     global n
     global correct
@@ -161,7 +162,7 @@ def game(request):
             student.results.append('Score: ' + score + '%' ' Time: ' + counter)
             student.save()
     ## if student finishes game but doesn't pass
-        elif student.problem_number > 12 and correct <= 10:
+        elif student.problem_number > 12 and student.correct <= 10:
             game_complete = True
             lesson_pass = False
     ## stop timer
@@ -171,7 +172,7 @@ def game(request):
     ## update lesson tracker 
             tracker = (len(student.lessons_completed) + 1)
     ## caluclate score in percentage 
-            score = str(round(correct/12 * 100, 2))
+            score = str(round(student.correct/12 * 100, 2))
     ## if students hasn't attemped any lessons, append lessons attempted 
             if len(student.lessons_attempted) == 0:
                 student.lessons_attempted.append(tracker)
