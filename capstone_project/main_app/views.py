@@ -84,7 +84,7 @@ def signup_view(request):
 
 
 # game view 
-tic = None
+# tic = None
 n = None
 correct = None
 game_complete = False
