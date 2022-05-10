@@ -109,15 +109,15 @@ def game(request):
     ## set iterator to length of lessons completed by current student
     j= len(student.lessons_completed)
     ## if all lessons are completed set students lesson back to 2nd lesson
-    # if j < 12:
-    #     j = len(student.lessons_completed)
-    # else:
-    #     j= random.randint(0,11)
-    #     ("top else is running")
-    ## set animal picture based on which lesson is being done 
-    # animal_pic = animal[j]
-    # animal_sound = sound[j]
-    # print(animal_sound)
+    if j < 12:
+        j = len(student.lessons_completed)
+    else:
+        j= random.randint(0,11)
+        ("top else is running")
+    # set animal picture based on which lesson is being done 
+    animal_pic = animal[j]
+    animal_sound = sound[j]
+    print(animal_sound)
     ## this happens when a student enters an answer
     if request.method == 'POST':
     ## array of class names for positioning/moving animal 
