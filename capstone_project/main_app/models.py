@@ -1,3 +1,4 @@
+from tokenize import Number
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.contrib import admin
@@ -47,7 +48,10 @@ class Student(models.Model):
     lessons_attempted = ArrayField(base_field=models.CharField(max_length=200, null=True), default=list, blank=True)
     results = ArrayField(base_field=models.CharField(max_length=200, null=True), default=list, blank=True)
     attempted_results = ArrayField(base_field=models.CharField(max_length=200, null=True), default=list, blank=True)
-    
+    problem_number= models.IntegerField(blank=True, null=True)
+    correct = models.IntegerField(blank=True, null=True)
+    ##correct
+    ##global variable resets in heroku, need to access variables through saved student model. 
     # if Model is referenced return the string of the user
     def __str__(self):
         return str(self.user)
