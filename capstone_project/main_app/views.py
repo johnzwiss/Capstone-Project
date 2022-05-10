@@ -90,12 +90,12 @@ correct = None
 game_complete = False
 lesson_pass = False
 counter = None
-j=None
+# j=None
 picture = None
 
 def game(request):
     global picture
-    global j
+    # global j
     global n
     global correct
     global game_complete
@@ -107,11 +107,10 @@ def game(request):
     ## call student object 
     student = Student.objects.get(user_id = current_user.id)
     ## set iterator to length of lessons completed by current student
-    # j= len(student.lessons_completed)
+    j= len(student.lessons_completed)
     ## if all lessons are completed set students lesson back to 2nd lesson
     # if j < 12:
     #     j = len(student.lessons_completed)
-    #     print("this if statement is hittin", j)
     # else:
     #     j= random.randint(0,11)
     #     ("top else is running")
